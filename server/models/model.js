@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const model = new Schema({});
+const ModelS = new Schema({
+  name: String,
+});
 
-const Model = mongoose.model("Model", model);
+const Model = mongoose.model("Model", ModelS);
 module.exports = Model;

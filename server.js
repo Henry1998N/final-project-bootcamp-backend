@@ -11,6 +11,6 @@ dataBaseManager.connect();
 app.use(cors());
 app.use("/", houseApi);
 
-app.listen(constants.PORT, function () {
+app.listen(process.env.PORT || constants.PORT, function () {
   console.log("server up and running on port " + constants.PORT);
 });

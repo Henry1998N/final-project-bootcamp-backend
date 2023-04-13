@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Model = require("../models/model");
 router.post("/house", function (req, res) {
-  const newData = new Model({ name: "hiii orii" });
+  const newData = new Model({ name: "hiii fakerrrss" });
   newData.save();
   res.send("yeah ori");
 });

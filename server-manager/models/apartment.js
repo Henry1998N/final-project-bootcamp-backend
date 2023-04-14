@@ -1,10 +1,13 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const apartmentSchema = new Schema({
-  name: String,
-  residents: [{ type: Schema.Types.ObjectId, ref: "Resident" }],
+const model = new Schema({
+  apartmentName: String,
+  location: String,
+  budget: Number,
+  residents: [{ type: Schema.Types.ObjectId, ref: "Residnt" }],
+  meals: Array,
 });
 
-const Apartment = mongoose.model("Apartment", apartmentSchema);
-module.exports = Apartment;
+const Model = mongoose.model("Apartment", model);
+module.exports = Model;

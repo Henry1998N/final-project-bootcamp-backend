@@ -1,9 +1,16 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const residentSchema = new Schema({
-  name: String,
+const model = new Schema({
+  firstName: String,
+  lastName: String,
+  residintId: String,
+  birthDate: Date,
+  residentBuget: Number,
+  medication: Object,
+  allergies: Array,
+  medicalAppointments: Object,
 });
 
-const Resident = mongoose.model("Resident", residentSchema);
-module.exports = Resident;
+const Model = mongoose.model("Resident", model);
+module.exports = Model;

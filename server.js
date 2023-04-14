@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+require("dotenv").config(); // Load the .env file
+
 const constant = require("./utilities/constants/constant");
 const apartmentApi = require("./server-manager/routes/apartment-api");
 const instructorApi = require("./server-manager/routes/instructor-api");
@@ -13,6 +15,6 @@ app.use(cors());
 app.use("/", apartmentApi);
 app.use("/instruct", instructorApi);
 
-app.listen(constant.PORT, function () {
+app.listen(process.env.PORT || constant.PORT, function () {
   console.log("server up and running on port " + constant.PORT);
 });

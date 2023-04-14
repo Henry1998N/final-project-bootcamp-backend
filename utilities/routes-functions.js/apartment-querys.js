@@ -1,6 +1,6 @@
 const Instructor = require("../../server-manager/models/instructor");
 const Apartment = require("../../server-manager/models/apartment");
-
+const Resident = require("../../server-manager/models/resident");
 const generateApartment = function (apartment) {
   const newApartment = new Apartment({ name: apartment.name });
   newApartment.save();
@@ -13,4 +13,15 @@ const getApartmentsByInstructorId = function (instructorId) {
       return data.apartments;
     });
 };
-module.exports = { getApartmentsByInstructorId, generateApartment };
+const getResidentsByApartmentName = function (apartmentName) {
+  return Apartment.findOne({ name: apartmentName }, { residents: 1 })
+    .populate("residents")
+    .then((data) => {
+      return data.residents;
+    });
+};
+module.exports = {
+  getApartmentsByInstructorId,
+  generateApartment,
+  getResidentsByApartmentName,
+};

@@ -3,9 +3,12 @@ require("dotenv").config(); // Load the .env file
 const DataBaseManager = function () {
   const connect = function () {
     mongoose
-      .connect(process.env.MONGO_URL, {
-        useNewUrlParser: true,
-      })
+      .connect(
+        "mongodb+srv://heenry7:qUyjDXu02VhMrdRE@cluster0.inansdf.mongodb.net/?retryWrites=true&w=majority",
+        {
+          useNewUrlParser: true,
+        }
+      )
       .then(() => {
         console.log("connected");
       })

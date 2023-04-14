@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const model = new Schema({
+const apartmentSchema = new Schema({
   apartmentName: String,
   location: String,
   budget: Number,
@@ -9,5 +9,5 @@ const model = new Schema({
   meals: Array,
 });
 
-const Model = mongoose.model("Apartment", model);
+const Model = mongoose.model("Apartment", apartmentSchema);
 module.exports = Model;

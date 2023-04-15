@@ -20,8 +20,14 @@ const getResidentsByApartmentName = function (apartmentName) {
       return data.residents;
     });
 };
+const getAllApartments = function () {
+  return Apartment.find({}).then((apartments) => {
+    return apartments;
+  });
+};
 module.exports = {
   getApartmentsByInstructorId,
   generateApartment,
   getResidentsByApartmentName,
+  getAllApartments,
 };

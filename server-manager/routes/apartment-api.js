@@ -21,4 +21,9 @@ router.post("/apartment", function (req, res) {
   apartmentQuerys.generateApartment(apartment);
   res.status(201).send({ message: "created" });
 });
+
+router.get("/apartments", async function (req, res) {
+  const apartments = await apartmentQuerys.getAllApartments();
+  res.send(apartments);
+});
 module.exports = router;

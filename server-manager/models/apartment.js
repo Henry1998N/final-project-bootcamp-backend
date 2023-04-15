@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const apartmentSchema = new Schema({
   apartmentName: String,
-  location: String,
+  address: String,
   budget: Number,
   residents: [{ type: Schema.Types.ObjectId, ref: "Resident" }],
   meals: Array,

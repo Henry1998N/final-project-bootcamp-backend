@@ -7,8 +7,8 @@ const residents = [
         gender: 'Male',
         image: './users-images/011.jpg',
         address: {
-            value: '10 HaYarkon St, Tel Aviv, Israel',
-            wazeLink: 'https://waze.com/ul/hsv8rp1d',
+            value: '15 Dizengoff St, Tel Aviv, Israel',
+            wazeLink: 'https://waze.com/ul/rt64kj8d',
         },
         budget: 5000,
         allergies: ['Peanuts', 'Shellfish'],
@@ -41,7 +41,7 @@ const residents = [
         gender: 'Female',
         image: './users-images/001.jpg',
         address: {
-            value: '25 HaYarkon St, Tel Aviv, Israel',
+            value: '15 Dizengoff St, Tel Aviv, Israel',
             wazeLink: 'https://waze.com/ul/rt64kj8d',
         },
         budget: 3500,
@@ -109,7 +109,7 @@ const residents = [
         gender: 'Female',
         image: './users-images/002.jpg',
         address: {
-            value: '8 Rothschild Blvd, Tel Aviv, Israel',
+            value: '15 Rothschild Blvd, Tel Aviv, Israel',
             wazeLink: 'https://waze.com/ul/rt64kj8d',
         },
         budget: 5000,
@@ -211,7 +211,7 @@ const residents = [
         gender: 'Female',
         image: './users-images/004.jpg',
         address: {
-            value: '7 Dizengoff St, Tel Aviv, Israel',
+            value: '20 Allenby St, Tel Aviv, Israel',
             wazeLink: 'https://waze.com/ul/rt64kj8d',
         },
         budget: 6000,
@@ -245,7 +245,7 @@ const residents = [
         gender: 'Male',
         image: './users-images/014.jpg',
         address: {
-            value: '12 HaYarkon St, Tel Aviv, Israel',
+            value: '20 Allenby St, Tel Aviv, Israel',
             wazeLink: 'https://waze.com/ul/rt64kj8d',
         },
         budget: 4500,
@@ -279,8 +279,8 @@ const residents = [
         gender: 'Female',
         image: './users-images/005.jpg',
         address: {
-            value: '15 Rothschild Blvd, Tel Aviv, Israel',
-            wazeLink: 'https://www.waze.com/ul?ll=32.0651,34.7748',
+            value: '20 Allenby St, Tel Aviv, Israel',
+            wazeLink: 'https://waze.com/ul/rt64kj8d',
         },
         budget: 4800,
         allergies: ['Peanuts', 'Fish'],
@@ -313,8 +313,8 @@ const residents = [
         gender: 'Male',
         image: './users-images/015.jpg',
         address: {
-            value: '22 HaAliya St, Haifa, Israel',
-            wazeLink: 'https://www.waze.com/ul?ll=32.8204,34.9838',
+            value: '8 Dizengoff St, Tel Aviv, Israel',
+            wazeLink: 'https://www.waze.com/ul?ll=32.0778,34.7713',
         },
         budget: 4200,
         allergies: ['Gluten', 'Sesame'],

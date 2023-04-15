@@ -1,17 +1,16 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const ResidentSchema = new Schema({
+const model = new Schema({
   firstName: String,
   lastName: String,
-  residintId: String,
+  residentId: String,
   birthDate: Date,
-  residentBuget: Number,
+  residentBudget: Number,
   medication: Object,
   allergies: Array,
   medicalAppointments: Object,
-  familyConnections: Array,
 });
 
-const Model = mongoose.model("Resident", ResidentSchema);
+const Model = mongoose.model("Resident", model);
 module.exports = Model;

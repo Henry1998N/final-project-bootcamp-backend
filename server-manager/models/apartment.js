@@ -5,9 +5,9 @@ const apartmentSchema = new Schema({
   apartmentName: String,
   location: String,
   budget: Number,
-  residents: [{ type: Schema.Types.ObjectId, ref: "Residnt" }],
+  residents: [{ type: Schema.Types.ObjectId, ref: "Resident" }],
   meals: Array,
 });
 
-const Model = mongoose.model("Apartment", apartmentSchema);
-module.exports = Model;
+const Apartment = mongoose.model("Apartment", apartmentSchema);
+module.exports = Apartment;

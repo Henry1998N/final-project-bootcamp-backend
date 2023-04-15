@@ -14,7 +14,7 @@ const getApartmentsByInstructorId = function (instructorId) {
     });
 };
 const getResidentsByApartmentName = function (apartmentName) {
-  return Apartment.findOne({ name: apartmentName }, { residents: 1 })
+  return Apartment.findOne({ apartmentName: apartmentName }, { residents: 1 })
     .populate("residents")
     .then((data) => {
       return data.residents;

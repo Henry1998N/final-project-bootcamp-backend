@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const model = new Schema({
+const residentSchema = new Schema({
   firstName: String,
   lastName: String,
   residentId: String,
@@ -10,7 +10,8 @@ const model = new Schema({
   medication: Object,
   allergies: Array,
   medicalAppointments: Object,
+  familyConnections: Array,
 });
 
-const Model = mongoose.model("Resident", model);
-module.exports = Model;
+const Resident = mongoose.model("Resident", residentSchema);
+module.exports = Resident;

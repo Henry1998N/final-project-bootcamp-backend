@@ -3,13 +3,15 @@ const app = express();
 require("dotenv").config(); // Load the .env file
 const constant = require("./utilities/constants/constant");
 const cors = require("cors");
+const {
+  connectToDatabase,
+} = require("./utilities/database-manager/database-man");
+
 const apartmentApi = require("./server-manager/routes/apartment-api");
 const instructorApi = require("./server-manager/routes/instructor-api");
 const residentApi = require("./server-manager/routes/resident-api");
-//todo:change
-const dataBaseModule = require("./utilities/database-manager/database-man");
-const dataBaseManager = new dataBaseModule();
-dataBaseManager.connect();
+
+connectToDatabase();
 //todo:septate to module
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

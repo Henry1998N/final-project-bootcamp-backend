@@ -48,8 +48,10 @@ const RESIDENTS = [
     allergies: ["Eggs", "Fish"],
     medicalAppointments: [
       {
-        typeOfInspection: "2021-09-15",
+        time: "10:30",
+        date: "2021-09-15",
         attended: true,
+        typeOfInspection: "blood check",
       },
       {
         typeOfInspection: "2022-12-10",

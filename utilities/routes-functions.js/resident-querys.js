@@ -1,6 +1,6 @@
 const Resident = require("../../server-manager/models/resident");
 
-const generateResident = function (resident) {
+const generateResident = function (resident, residentId) {
   const newResident = new Resident({
     firstName: resident.firstName,
     lastName: resident.lastName,
@@ -15,4 +15,22 @@ const generateResident = function (resident) {
   });
   newResident.save();
 };
-module.exports = { generateResident };
+const getResidentDetailsByQueryString = function (
+  specificFiledToGet,
+  residentIdParameter
+) {
+  return Resident.find({ residentId: residentIdParameter }).then(
+    (specificResident) => {
+      const resident = {};
+      if (specificFiledToGet.length > 0) {
+        specificFiledToGet.forEach((field) => {
+          resident[field] = specificResident[0][field];
+        });
+        return resident;
+      }
+
+      return specificResident;
+    }
+  );
+};
+module.exports = { generateResident, getResidentDetailsByQueryString };

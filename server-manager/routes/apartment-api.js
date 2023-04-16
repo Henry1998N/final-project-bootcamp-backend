@@ -1,29 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const apartmentQuerys = require("../../utilities/routes-functions.js/apartment-querys");
+const apartmentController = require("../../utilities/controller/apartment-handler");
+/// todo:add try and catch
+router.get(
+  "/apartments/:instructorId",
+  apartmentController.getApartmentsByInstructorId
+);
+router.get(
+  "/residents/:apartmentName",
+  apartmentController.getResidentsByApartmentName
+);
 
-router.get("/apartments/:instructorId", async function (req, res) {
-  const instructorId = req.params.instructorId;
-  const apartments = await apartmentQuerys.getApartmentsByInstructorId(
-    instructorId
-  );
-  res.status(200).send(apartments);
-});
-router.get("/residents/:apartmentName", async function (req, res) {
-  const apartmentName = req.params.apartmentName;
-  const residents = await apartmentQuerys.getResidentsByApartmentName(
-    apartmentName
-  );
-  res.send(residents);
-});
-router.post("/apartment", function (req, res) {
-  const apartment = req.body.apartment;
-  apartmentQuerys.generateApartment(apartment);
-  res.status(201).send({ message: "created" });
-});
-
-router.get("/apartments", async function (req, res) {
-  const apartments = await apartmentQuerys.getAllApartments();
-  res.send(apartments);
-});
+router.get("/apartments", apartmentController.getApartments);
 module.exports = router;

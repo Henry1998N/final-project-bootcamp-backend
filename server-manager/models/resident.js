@@ -2,16 +2,18 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const residentSchema = new Schema({
+  residentId: String,
   firstName: String,
   lastName: String,
-  residentId: String,
-  birthDate: Date,
-  residentBudget: Number,
+  dateOfBirth: Date,
+  gender: String,
+  image: String,
+  address: Object,
+  budget: Number,
   medication: Object,
   allergies: Array,
   medicalAppointments: Object,
-  familyConnections: Array,
-  picture: String,
+  emergencyContacts: Array,
 });
 
 const Resident = mongoose.model("Resident", residentSchema);

@@ -64,7 +64,7 @@ const updateResidentMedication = async function (
       console.log(err);
     });
 };
-const addContactToResident = (residentId, newContact) => {
+const addContactToResident = async (residentId, newContact) => {
   return Resident.findOneAndUpdate(
     { residentId: residentId },
     { $push: { familyConnections: newContact } }
@@ -73,7 +73,21 @@ const addContactToResident = (residentId, newContact) => {
       return "contact " + newContact.name + "added to family connections";
     })
     .catch((err) => {
-      console.log(err.message);
+      return err.message;
+    });
+};
+const scheduleMedicalAppointment = async function (residentId, appointment) {
+  return Resident.findOneAndUpdate(
+    { residentId: residentId },
+    { $push: { medicalAppointments: appointment } }
+  )
+    .then(() => {
+      return (
+        "appointment Scheduled at " + appointment.time + " " + appointment.date
+      );
+    })
+    .catch((err) => {
+      return err.message;
     });
 };
 module.exports = {
@@ -81,4 +95,5 @@ module.exports = {
   getResidentDetailsByQueryString,
   updateResidentMedication,
   addContactToResident,
+  scheduleMedicalAppointment,
 };

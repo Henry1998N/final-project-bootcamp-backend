@@ -16,4 +16,8 @@ router.put(
   "/familyConnections/:residentId",
   residentHandler.addContactToResidentFamilyConnection
 );
+router.put(
+  "/medicalAppointment/:residentId",
+  residentHandler.scheduleResidentMedicalAppointment
+);
 module.exports = router;

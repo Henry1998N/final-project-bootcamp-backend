@@ -47,8 +47,23 @@ const addContactToResidentFamilyConnection = async function (req, res) {
   }
 };
 
+const scheduleResidentMedicalAppointment = async function (req, res) {
+  try {
+    const residentId = req.params.residentId;
+    const { newAppointment } = req.body;
+    const responseMessage = await residentQuery.scheduleMedicalAppointment(
+      residentId,
+      newAppointment
+    );
+    res.status(200).send({ message: responseMessage });
+  } catch (err) {
+    res.status(404).send({ message: err.message });
+  }
+};
+
 module.exports = {
   getResidentDetailsByQueryString,
   updateResidentMedicationByMedicationName,
   addContactToResidentFamilyConnection,
+  scheduleResidentMedicalAppointment,
 };

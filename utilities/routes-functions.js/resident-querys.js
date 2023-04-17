@@ -64,8 +64,21 @@ const updateResidentMedication = async function (
       console.log(err);
     });
 };
+const addContactToResident = (residentId, newContact) => {
+  return Resident.findOneAndUpdate(
+    { residentId: residentId },
+    { $push: { familyConnections: newContact } }
+  )
+    .then(() => {
+      return "contact " + newContact.name + "added to family connections";
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
 module.exports = {
   generateResident,
   getResidentDetailsByQueryString,
   updateResidentMedication,
+  addContactToResident,
 };

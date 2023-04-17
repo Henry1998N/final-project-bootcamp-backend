@@ -11,4 +11,9 @@ router.put(
   "/:residentId/",
   residentHandler.updateResidentMedicationByMedicationName
 );
+
+router.put(
+  "/familyConnections/:residentId",
+  residentHandler.addContactToResidentFamilyConnection
+);
 module.exports = router;

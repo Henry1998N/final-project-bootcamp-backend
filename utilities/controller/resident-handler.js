@@ -29,12 +29,26 @@ const updateResidentMedicationByMedicationName = async function (req, res) {
     res.send({ message: resMessage });
   } catch (err) {
     console.log(err);
-    res.status(409).send({ message: err.message.message });
-    res.send({ message: err.message });
+    res.status(404).send({ message: err.message.message });
+  }
+};
+
+const addContactToResidentFamilyConnection = async function (req, res) {
+  try {
+    const residentId = req.params.residentId;
+    const { newContact } = req.body;
+    const responseMessage = await residentQuery.addContactToResident(
+      residentId,
+      newContact
+    );
+    res.status(200).send({ message: responseMessage });
+  } catch (err) {
+    res.status(404).send({ message: err.message });
   }
 };
 
 module.exports = {
   getResidentDetailsByQueryString,
   updateResidentMedicationByMedicationName,
+  addContactToResidentFamilyConnection,
 };

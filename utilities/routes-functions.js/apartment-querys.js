@@ -13,6 +13,7 @@ const getApartmentsByInstructorId = function (instructorId) {
       return data.apartments;
     });
 };
+
 const getResidentsByApartmentName = function (apartmentName) {
   return Apartment.findOne({ apartmentName: apartmentName }, { residents: 1 })
     .populate("residents")
@@ -20,14 +21,22 @@ const getResidentsByApartmentName = function (apartmentName) {
       return data.residents;
     });
 };
+
 const getAllApartments = function () {
   return Apartment.find({}).then((apartments) => {
     return apartments;
   });
 };
+
+const getApartmentByName = async function (apartmentName) {
+  let apartment = await Apartment.findOne({ apartmentName: apartmentName })
+  return apartment;
+};
+
 module.exports = {
   getApartmentsByInstructorId,
   generateApartment,
   getResidentsByApartmentName,
   getAllApartments,
+  getApartmentByName,
 };

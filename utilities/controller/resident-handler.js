@@ -14,8 +14,26 @@ const getResidentDetailsByQueryString = async function (req, res) {
     res.status(200).send(resident);
   } catch (err) {
     console.log(err);
-    res.send({ message: err });
+    res.send({ message: err.message });
+  }
+};
+const updateResidentMedicationByMedicationName = async function (req, res) {
+  try {
+    const residentId = req.params.residentId;
+    const { period, medicationName } = req.query;
+    const resMessage = await residentQuery.updateResidentMedication(
+      residentId,
+      period,
+      medicationName
+    );
+    res.send({ message: resMessage });
+  } catch (err) {
+    console.log(err);
+    res.status(409).send({ message: err.message });
   }
 };
 
-module.exports = { getResidentDetailsByQueryString };
+module.exports = {
+  getResidentDetailsByQueryString,
+  updateResidentMedicationByMedicationName,
+};

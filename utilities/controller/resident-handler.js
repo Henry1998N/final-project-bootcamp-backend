@@ -29,9 +29,10 @@ const updateResidentMedicationByMedicationName = async function (req, res) {
     res.send({ message: resMessage });
   } catch (err) {
     console.log(err);
-    res.status(409).send({ message: err.message });
+    res.status(409).send({ message: err.message.message });
   }
 };
+
 
 module.exports = {
   getResidentDetailsByQueryString,

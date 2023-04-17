@@ -22,7 +22,7 @@ const RESIDENTS = [
         attended: false,
       },
     ],
-    emergencyContacts: [
+    familyConnections: [
       {
         name: "Rina Levi",
         contactNumber: "054-1234567",
@@ -58,7 +58,7 @@ const RESIDENTS = [
         attended: true,
       },
     ],
-    emergencyContacts: [
+    familyConnections: [
       {
         name: "Rachel Green",
         contactNumber: "052-1234567",
@@ -92,7 +92,7 @@ const RESIDENTS = [
         attended: false,
       },
     ],
-    emergencyContacts: [
+    familyConnections: [
       {
         name: "Daniel Levin",
         contactNumber: "053-9876543",
@@ -126,7 +126,7 @@ const RESIDENTS = [
         attended: false,
       },
     ],
-    emergencyContacts: [
+    familyConnections: [
       {
         name: "Sophia Johnson",
         contactNumber: "051-9876543",
@@ -160,7 +160,7 @@ const RESIDENTS = [
         attended: false,
       },
     ],
-    emergencyContacts: [
+    familyConnections: [
       {
         name: "Oliver Martinez",
         contactNumber: "052-3456789",
@@ -194,7 +194,7 @@ const RESIDENTS = [
         attended: false,
       },
     ],
-    emergencyContacts: [
+    familyConnections: [
       {
         name: "Emma Davis",
         contactNumber: "059-1234567",
@@ -228,7 +228,7 @@ const RESIDENTS = [
         attended: true,
       },
     ],
-    emergencyContacts: [
+    familyConnections: [
       {
         name: "Noah Wilson",
         contactNumber: "056-2345678",
@@ -262,7 +262,7 @@ const RESIDENTS = [
         attended: false,
       },
     ],
-    emergencyContacts: [
+    familyConnections: [
       {
         name: "Mia Taylor",
         contactNumber: "053-9876543",
@@ -296,7 +296,7 @@ const RESIDENTS = [
         attended: true,
       },
     ],
-    emergencyContacts: [
+    familyConnections: [
       {
         name: "Olivia Cohen",
         contactNumber: "053-5555550",
@@ -330,7 +330,7 @@ const RESIDENTS = [
         attended: false,
       },
     ],
-    emergencyContacts: [
+    familyConnections: [
       {
         name: "Michael Goldberg",
         contactNumber: "053-5555552",
@@ -364,7 +364,7 @@ const RESIDENTS = [
         attended: true,
       },
     ],
-    emergencyContacts: [
+    familyConnections: [
       {
         name: "Emma Kim",
         contactNumber: "053-5555554",
@@ -398,7 +398,7 @@ const RESIDENTS = [
         attended: false,
       },
     ],
-    emergencyContacts: [
+    familyConnections: [
       {
         name: "Grace Lee",
         contactNumber: "053-5555556",
@@ -432,7 +432,7 @@ const RESIDENTS = [
         attended: true,
       },
     ],
-    emergencyContacts: [
+    familyConnections: [
       {
         name: "Ava Wong",
         contactNumber: "053-5555558",
@@ -466,7 +466,7 @@ const RESIDENTS = [
         attended: false,
       },
     ],
-    emergencyContacts: [
+    familyConnections: [
       {
         name: "Liam Chen",
         contactNumber: "053-5555560",
@@ -500,7 +500,7 @@ const RESIDENTS = [
         attended: true,
       },
     ],
-    emergencyContacts: [
+    familyConnections: [
       {
         name: "Emma Wang",
         contactNumber: "053-5555562",
@@ -534,7 +534,7 @@ const RESIDENTS = [
         attended: false,
       },
     ],
-    emergencyContacts: [
+    familyConnections: [
       {
         name: "Olivia Wong",
         contactNumber: "053-5555564",
@@ -568,7 +568,7 @@ const RESIDENTS = [
         attended: true,
       },
     ],
-    emergencyContacts: [
+    familyConnections: [
       {
         name: "Emily Chan",
         contactNumber: "053-5555566",
@@ -602,7 +602,7 @@ const RESIDENTS = [
         attended: false,
       },
     ],
-    emergencyContacts: [
+    familyConnections: [
       {
         name: "Sophie Chen",
         contactNumber: "053-7777788",
@@ -636,7 +636,7 @@ const RESIDENTS = [
         attended: false,
       },
     ],
-    emergencyContacts: [
+    familyConnections: [
       {
         name: "Grace Tran",
         contactNumber: "053-8888899",
@@ -670,7 +670,7 @@ const RESIDENTS = [
         attended: false,
       },
     ],
-    emergencyContacts: [
+    familyConnections: [
       {
         name: "Emily Chen",
         contactNumber: "053-1234567",

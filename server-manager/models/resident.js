@@ -13,7 +13,7 @@ const residentSchema = new Schema({
   medication: Object,
   allergies: Array,
   medicalAppointments: Object,
-  emergencyContacts: Array,
+  familyConnections: Array,
 });
 
 const Resident = mongoose.model("Resident", residentSchema);

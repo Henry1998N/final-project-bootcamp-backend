@@ -1,19 +1,15 @@
 const mongoose = require("mongoose");
-require("dotenv").config(); // Load the .env file
-const DataBaseManager = function () {
-  const connect = function () {
-    mongoose
-      .connect(process.env.MONGO_URL, {
-        useNewUrlParser: true,
-      })
-      .then(() => {
-        console.log("connected");
-      })
-      .catch((err) => console.log(err));
-    //
-  };
-  return {
-    connect,
-  };
+require("dotenv").config();
+const connectToDatabase = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("Connected to MongoDB");
+  } catch (err) {
+    console.error("Error connecting to MongoDB", err);
+  }
 };
-module.exports = DataBaseManager;
+
+module.exports = { connectToDatabase };

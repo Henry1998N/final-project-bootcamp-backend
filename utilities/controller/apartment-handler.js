@@ -1,4 +1,5 @@
 const apartmentQuerys = require("../routes-functions.js/apartment-querys");
+
 const getApartmentsByInstructorId = async function (req, res) {
   try {
     const instructorId = req.params.instructorId;
@@ -10,6 +11,7 @@ const getApartmentsByInstructorId = async function (req, res) {
     res.status(409).send({ message: "instructorId undefined", error: err });
   }
 };
+
 const getResidentsByApartmentName = async function (req, res) {
   try {
     const apartmentName = req.params.apartmentName;
@@ -21,6 +23,7 @@ const getResidentsByApartmentName = async function (req, res) {
     res.status(409).send({ message: "apartmentName undefined", error: err });
   }
 };
+
 const getApartments = async function (req, res) {
   try {
     const apartments = await apartmentQuerys.getAllApartments();
@@ -29,10 +32,23 @@ const getApartments = async function (req, res) {
     res.status(409).send({ message: "apartments undefined", error: err });
   }
 };
+
+const getApartmentByName = async function(req, res) {
+  try {
+    const apartmentName = req.params.apartmentName;
+    const apartment = await apartmentQuerys.getApartmentByName(apartmentName)
+    res.send(apartment)
+  } catch (err) {
+    res.status(409).send({ message: "apartmentName undefined", error: err });
+  }
+
+}
+
 module.exports = {
   getApartmentsByInstructorId,
   getResidentsByApartmentName,
   getApartments,
+  getApartmentByName,
 };
 // router.post("/apartment", function (req, res) {
 //   const apartment = req.body.apartment;

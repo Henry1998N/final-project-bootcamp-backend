@@ -29,6 +29,11 @@ const getAllApartments = function () {
   });
 };
 
+const getApartmentByName = async function (apartmentName) {
+  let apartment = await Apartment.findOne({ apartmentName: apartmentName })
+  return apartment;
+};
+
 module.exports = {
   getApartmentsByInstructorId,
 
@@ -37,4 +42,5 @@ module.exports = {
   getResidentsByApartmentName,
 
   getAllApartments,
+  getApartmentByName,
 };

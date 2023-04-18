@@ -20,4 +20,8 @@ router.put(
   "/medicalAppointment/:residentId",
   residentHandler.scheduleResidentMedicalAppointment
 );
+router.get(
+  "/medicalAppointment/:residentId",
+  residentHandler.getResidentsMedicalAppointment
+);
 module.exports = router;

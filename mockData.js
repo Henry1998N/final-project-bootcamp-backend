@@ -1,5 +1,6 @@
 const Resident = require("./server-manager/models/resident");
 const Apartment = require("./server-manager/models/apartment");
+const Appointment = require("./server-manager/models/appointment");
 const data = require("./mock-data/residents");
 const apartmentData = require("./mock-data/apartments");
 const {
@@ -12,6 +13,19 @@ const res = [];
 /// i=5 ; i<10
 /// i=10 ; i<15
 for (let i = 15; i < 20; i++) {
+  const medical = [];
+  data.RESIDENTS[i].medicalAppointments.forEach((m) => {
+    medical.push(
+      new Appointment({
+        typeOfInspection: m.typeOfInspection,
+        date: m.date,
+        attended: m.attended,
+      })
+    );
+  });
+  medical.forEach((m) => {
+    m.save();
+  });
   res.push(
     new Resident({
       residentId: data.RESIDENTS[i].residentId,
@@ -23,7 +37,7 @@ for (let i = 15; i < 20; i++) {
       address: data.RESIDENTS[i].address,
       budget: data.RESIDENTS[i].budget,
       allergies: data.RESIDENTS[i].allergies,
-      medicalAppointments: data.RESIDENTS[i].medicalAppointments,
+      medicalAppointments: medical,
       familyConnections: data.RESIDENTS[i].familyConnections,
       medication: data.RESIDENTS[i].medications,
     })

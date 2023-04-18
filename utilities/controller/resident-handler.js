@@ -60,10 +60,22 @@ const scheduleResidentMedicalAppointment = async function (req, res) {
     res.status(404).send({ message: err.message });
   }
 };
-
+const getResidentsMedicalAppointment = async function (req, res) {
+  try {
+    const residentId = req.params.residentId;
+    const response = await residentQuery.getResidentMedicalAppointment(
+      residentId
+    );
+    // console.log(response);
+    res.status(200).send(response);
+  } catch (err) {
+    res.status(404).send({ message: err.message });
+  }
+};
 module.exports = {
   getResidentDetailsByQueryString,
   updateResidentMedicationByMedicationName,
   addContactToResidentFamilyConnection,
   scheduleResidentMedicalAppointment,
+  getResidentsMedicalAppointment,
 };

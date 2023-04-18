@@ -19,7 +19,7 @@ const getResidentDetailsByQueryString = function (
   specificFiledToGet,
   residentIdParameter
 ) {
-  return Resident.find({ residentId: residentIdParameter }).then(
+  return Resident.find({ _id: residentIdParameter }).then(
     (specificResident) => {
       const resident = {};
       if (specificFiledToGet.length > 0) {
@@ -62,7 +62,7 @@ const updateResidentMedication = async function (
   const resident = await getResidentDetailsByQueryString([], residentId);
   const residentCopy = updateMedicineStatus(resident, period, medicationName);
   return Resident.findOneAndUpdate(
-    { residentId: residentCopy.residentId },
+    { _id: residentCopy.residentId },
     { medication: residentCopy.medication },
     { new: true }
   )
@@ -75,7 +75,7 @@ const updateResidentMedication = async function (
 };
 const addContactToResident = async (residentId, newContact) => {
   return Resident.findOneAndUpdate(
-    { residentId: residentId },
+    { _id: residentId },
     { $push: { familyConnections: newContact } }
   )
     .then(() => {
@@ -89,11 +89,24 @@ const addContactToResident = async (residentId, newContact) => {
 const scheduleMedicalAppointment = async function (residentId, appointment) {
   const newAppointment = generateAppointment(appointment, residentId);
   return Resident.findOneAndUpdate(
-    { residentId: residentId },
+    { _id: residentId },
     { $push: { medicalAppointments: newAppointment } }
   )
     .then(() => {
       return "appointment Scheduled at " + newAppointment.date;
+    })
+    .catch((err) => {
+      return err.message;
+    });
+};
+const getResidentMedicalAppointment = async function (residentId) {
+  const resident = await getResidentDetailsByQueryString([], residentId);
+  // console.log(resident);
+  return Resident.findById(resident[0]._id, { medicalAppointments: 1 })
+    .populate("medicalAppointments")
+    .then((appointments) => {
+      console.log(appointments);
+      return appointments;
     })
     .catch((err) => {
       return err.message;
@@ -105,4 +118,5 @@ module.exports = {
   updateResidentMedication,
   addContactToResident,
   scheduleMedicalAppointment,
+  getResidentMedicalAppointment,
 };

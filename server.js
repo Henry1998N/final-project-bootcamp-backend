@@ -6,6 +6,7 @@ const cors = require("cors");
 const {
   connectToDatabase,
 } = require("./utilities/database-manager/database-man");
+const {checkServerConnection} = require("./utilities/middleware/middlewareFunctions")
 
 const apartmentApi = require("./server-manager/routes/apartment-api");
 const instructorApi = require("./server-manager/routes/instructor-api");
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
 app.use("/", apartmentApi);
+app.use("/status", checkServerConnection)
 app.use("/instruct", instructorApi);
 app.use("/resident", residentApi);
 

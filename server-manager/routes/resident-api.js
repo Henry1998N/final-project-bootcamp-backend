@@ -20,6 +20,10 @@ router.put(
   "/medicalAppointment/:residentId",
   residentHandler.scheduleResidentMedicalAppointment
 );
+router.put(
+  "/appointment/:residentId",
+  residentHandler.changeMedicalAppointmentAttendedStatus
+);
 router.get(
   "/medicalAppointment/:residentId",
   residentHandler.getResidentsMedicalAppointment

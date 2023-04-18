@@ -1,4 +1,5 @@
 const residentQuery = require("../routes-functions.js/resident-querys");
+const mongoose = require("mongoose");
 const getResidentDetailsByQueryString = async function (req, res) {
   try {
     const queryString = req?.query;
@@ -66,8 +67,20 @@ const getResidentsMedicalAppointment = async function (req, res) {
     const response = await residentQuery.getResidentMedicalAppointment(
       residentId
     );
-    // console.log(response);
     res.status(200).send(response);
+  } catch (err) {
+    res.status(404).send({ message: err.message });
+  }
+};
+const changeMedicalAppointmentAttendedStatus = async function (req, res) {
+  try {
+    const id = req.body.appointmentId;
+    if (mongoose.Types.ObjectId.isValid(id)) {
+      const response = await residentQuery.changeMedicalAppointmentStatus(id);
+      res.status(200).send({ message: "updated" });
+    } else {
+      res.status(400).send({ message: `${id} is not a valid ObjectId` });
+    }
   } catch (err) {
     res.status(404).send({ message: err.message });
   }
@@ -78,4 +91,5 @@ module.exports = {
   addContactToResidentFamilyConnection,
   scheduleResidentMedicalAppointment,
   getResidentsMedicalAppointment,
+  changeMedicalAppointmentAttendedStatus,
 };

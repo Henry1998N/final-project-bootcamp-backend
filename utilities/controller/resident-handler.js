@@ -14,8 +14,56 @@ const getResidentDetailsByQueryString = async function (req, res) {
     res.status(200).send(resident);
   } catch (err) {
     console.log(err);
-    res.send({ message: err });
+    res.send({ message: err.message });
+  }
+};
+const updateResidentMedicationByMedicationName = async function (req, res) {
+  try {
+    const residentId = req.params.residentId;
+    const { period, medicationName } = req.query;
+    const resMessage = await residentQuery.updateResidentMedication(
+      residentId,
+      period,
+      medicationName
+    );
+    res.send({ message: resMessage });
+  } catch (err) {
+    console.log(err);
+    res.status(404).send({ message: err.message.message });
   }
 };
 
-module.exports = { getResidentDetailsByQueryString };
+const addContactToResidentFamilyConnection = async function (req, res) {
+  try {
+    const residentId = req.params.residentId;
+    const { newContact } = req.body;
+    const responseMessage = await residentQuery.addContactToResident(
+      residentId,
+      newContact
+    );
+    res.status(200).send({ message: responseMessage });
+  } catch (err) {
+    res.status(404).send({ message: err.message });
+  }
+};
+
+const scheduleResidentMedicalAppointment = async function (req, res) {
+  try {
+    const residentId = req.params.residentId;
+    const { newAppointment } = req.body;
+    const responseMessage = await residentQuery.scheduleMedicalAppointment(
+      residentId,
+      newAppointment
+    );
+    res.status(200).send({ message: responseMessage });
+  } catch (err) {
+    res.status(404).send({ message: err.message });
+  }
+};
+
+module.exports = {
+  getResidentDetailsByQueryString,
+  updateResidentMedicationByMedicationName,
+  addContactToResidentFamilyConnection,
+  scheduleResidentMedicalAppointment,
+};

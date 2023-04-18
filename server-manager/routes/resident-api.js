@@ -7,4 +7,17 @@ router.get("/:id", residentHandler.getResidentDetailsByQueryString);
 //   residentsQuery.generateResident(resident);
 //   res.status(201).send({ message: "created", newResident: resident });
 // });
+router.put(
+  "/:residentId/",
+  residentHandler.updateResidentMedicationByMedicationName
+);
+
+router.put(
+  "/familyConnections/:residentId",
+  residentHandler.addContactToResidentFamilyConnection
+);
+router.put(
+  "/medicalAppointment/:residentId",
+  residentHandler.scheduleResidentMedicalAppointment
+);
 module.exports = router;

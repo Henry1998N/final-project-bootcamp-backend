@@ -12,7 +12,7 @@ const residentSchema = new Schema({
   budget: Number,
   medication: Object,
   allergies: Array,
-  medicalAppointments: Object,
+  medicalAppointments: [{ type: Schema.Types.ObjectId, ref: "Appointment" }],
   familyConnections: Array,
 });
 

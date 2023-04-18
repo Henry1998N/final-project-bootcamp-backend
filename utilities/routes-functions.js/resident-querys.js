@@ -1,5 +1,5 @@
 const Resident = require("../../server-manager/models/resident");
-
+const Appointment = require("../../server-manager/models/appointment");
 const generateResident = function (resident, residentId) {
   const newResident = new Resident({
     firstName: resident.firstName,
@@ -32,6 +32,15 @@ const getResidentDetailsByQueryString = function (
       return specificResident;
     }
   );
+};
+const generateAppointment = function (appointment, residentId) {
+  const resident = getResidentDetailsByQueryString([], residentId)[0];
+  const newAppointment = new Appointment({
+    resident: resident,
+    date: appointment.date,
+    attended: false,
+  });
+  return newAppointment;
 };
 const updateMedicineStatus = function (resident, period, medicationName) {
   const residentCopy = resident[0];
@@ -76,15 +85,15 @@ const addContactToResident = async (residentId, newContact) => {
       return err.message;
     });
 };
+
 const scheduleMedicalAppointment = async function (residentId, appointment) {
+  const newAppointment = generateAppointment(appointment, residentId);
   return Resident.findOneAndUpdate(
     { residentId: residentId },
-    { $push: { medicalAppointments: appointment } }
+    { $push: { medicalAppointments: newAppointment } }
   )
     .then(() => {
-      return (
-        "appointment Scheduled at " + appointment.time + " " + appointment.date
-      );
+      return "appointment Scheduled at " + newAppointment.date;
     })
     .catch((err) => {
       return err.message;

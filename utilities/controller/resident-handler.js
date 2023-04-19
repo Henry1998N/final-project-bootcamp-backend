@@ -75,7 +75,7 @@ const getResidentsMedicalAppointment = async function (req, res) {
 };
 const changeMedicalAppointmentAttendedStatus = async function (req, res) {
   try {
-    const { appointmentId } = req.params.appointmentId;
+    const appointmentId = req.params.appointmentId;
     await appointmentQuires.changeMedicalAppointmentStatus(appointmentId);
     res.status(200).send({ message: "updated" });
   } catch (err) {

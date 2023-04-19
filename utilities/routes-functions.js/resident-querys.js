@@ -38,7 +38,7 @@ const generateAppointment = function (appointment, residentId) {
   const newAppointment = new Appointment({
     date: appointment.date,
     attended: false,
-    typeOfInspection:appointment.typeOfInspection
+    typeOfInspection: appointment.typeOfInspection,
   });
   return newAppointment;
 };
@@ -89,7 +89,7 @@ const addContactToResident = async (residentId, newContact) => {
 
 const scheduleMedicalAppointment = async function (residentId, appointment) {
   const newAppointment = generateAppointment(appointment, residentId);
-  newAppointment.save()
+  newAppointment.save();
   return Resident.findOneAndUpdate(
     { _id: residentId },
     { $push: { medicalAppointments: newAppointment } }
@@ -113,8 +113,7 @@ const getResidentMedicalAppointment = async function (residentId) {
     });
 };
 const changeMedicalAppointmentStatus = async function (appointmentId) {
-  console.log(appointmentId);
-  return Apartment.findOneAndUpdate(
+  return Appointment.findOneAndUpdate(
     { _id: appointmentId },
     { attended: true }
   ).catch((err) => {

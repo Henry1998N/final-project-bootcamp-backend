@@ -21,7 +21,7 @@ router.put(
   residentHandler.scheduleResidentMedicalAppointment
 );
 router.put(
-  "/appointment/:residentId",
+  "/appointment/status",
   residentHandler.changeMedicalAppointmentAttendedStatus
 );
 router.get(

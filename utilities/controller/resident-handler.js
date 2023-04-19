@@ -74,13 +74,9 @@ const getResidentsMedicalAppointment = async function (req, res) {
 };
 const changeMedicalAppointmentAttendedStatus = async function (req, res) {
   try {
-    const id = req.body.appointmentId;
-    if (mongoose.Types.ObjectId.isValid(id)) {
-      const response = await residentQuery.changeMedicalAppointmentStatus(id);
-      res.status(200).send({ message: "updated" });
-    } else {
-      res.status(400).send({ message: `${id} is not a valid ObjectId` });
-    }
+    const { appointmentId } = req.body;
+    await residentQuery.changeMedicalAppointmentStatus(appointmentId);
+    res.status(200).send({ message: "updated" });
   } catch (err) {
     res.status(404).send({ message: err.message });
   }

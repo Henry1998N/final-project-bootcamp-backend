@@ -30,8 +30,15 @@ const changeMedicalAppointmentStatus = async function (appointmentId) {
     return err.message;
   });
 };
+
+const deleteMedicalAppointment = async function (appointmentId) {
+  return Appointment.findByIdAndDelete(appointmentId).catch((err) => {
+    return err.message;
+  });
+};
 module.exports = {
   generateAppointment,
   changeMedicalAppointmentStatus,
   scheduleMedicalAppointment,
+  deleteMedicalAppointment,
 };

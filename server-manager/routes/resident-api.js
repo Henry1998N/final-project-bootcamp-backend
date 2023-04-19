@@ -28,4 +28,5 @@ router.get(
   "/medicalAppointment/:residentId",
   residentHandler.getResidentsMedicalAppointment
 );
+router.delete("/medicalAppointment", residentHandler.deleteMedicalAppointment);
 module.exports = router;

@@ -82,6 +82,16 @@ const changeMedicalAppointmentAttendedStatus = async function (req, res) {
     res.status(404).send({ message: err.message });
   }
 };
+
+const deleteMedicalAppointment = async function (req, res) {
+  try {
+    const { appointmentId } = req?.query;
+    await appointmentQuires.deleteMedicalAppointment(appointmentId);
+    res.status(204).end();
+  } catch (err) {
+    res.status(404).send({ message: err.message });
+  }
+};
 module.exports = {
   getResidentDetailsByQueryString,
   updateResidentMedicationByMedicationName,
@@ -89,4 +99,5 @@ module.exports = {
   scheduleResidentMedicalAppointment,
   getResidentsMedicalAppointment,
   changeMedicalAppointmentAttendedStatus,
+  deleteMedicalAppointment,
 };

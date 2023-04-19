@@ -104,8 +104,12 @@ const scheduleMedicalAppointment = async function (residentId, appointment) {
 const getResidentMedicalAppointment = async function (residentId) {
   const resident = await getResidentDetailsByQueryString([], residentId);
   return Resident.findById(resident[0]._id, { medicalAppointments: 1 })
+    .sort()
     .populate("medicalAppointments")
     .then((appointments) => {
+      appointments.medicalAppointments.sort(
+        (a, b) => new Date(a.date) - new Date(b.date)
+      );
       return appointments;
     })
     .catch((err) => {

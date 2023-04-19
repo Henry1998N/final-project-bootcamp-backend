@@ -75,7 +75,7 @@ const getResidentsMedicalAppointment = async function (req, res) {
 };
 const changeMedicalAppointmentAttendedStatus = async function (req, res) {
   try {
-    const { appointmentId } = req.body;
+    const { appointmentId } = req.params.appointmentId;
     await appointmentQuires.changeMedicalAppointmentStatus(appointmentId);
     res.status(200).send({ message: "updated" });
   } catch (err) {
@@ -92,6 +92,19 @@ const deleteMedicalAppointment = async function (req, res) {
     res.status(404).send({ message: err.message });
   }
 };
+const updateAppointmentDetails = async function (req, res) {
+  try {
+    const appointmentId = req.params.appointmentId;
+    const { updatedAppointment } = req.body;
+    await appointmentQuires.updateAppointmentDetails(
+      appointmentId,
+      updatedAppointment
+    );
+    res.status(200).send("updated");
+  } catch (err) {
+    res.status(404).send(err.message);
+  }
+};
 module.exports = {
   getResidentDetailsByQueryString,
   updateResidentMedicationByMedicationName,
@@ -100,4 +113,5 @@ module.exports = {
   getResidentsMedicalAppointment,
   changeMedicalAppointmentAttendedStatus,
   deleteMedicalAppointment,
+  updateAppointmentDetails,
 };

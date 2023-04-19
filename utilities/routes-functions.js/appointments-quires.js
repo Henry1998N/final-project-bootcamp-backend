@@ -36,9 +36,25 @@ const deleteMedicalAppointment = async function (appointmentId) {
     return err.message;
   });
 };
+const updateAppointmentDetails = async function (
+  appointmentId,
+  updatedAppointment
+) {
+  const fieldsToUpdate = {
+    typeOfInspection: updatedAppointment.typeOfInspection,
+    date: updatedAppointment.date,
+  };
+  return Appointment.findOneAndUpdate(
+    { _id: appointmentId },
+    { $set: fieldsToUpdate }
+  ).catch((err) => {
+    return err.message;
+  });
+};
 module.exports = {
   generateAppointment,
   changeMedicalAppointmentStatus,
   scheduleMedicalAppointment,
   deleteMedicalAppointment,
+  updateAppointmentDetails,
 };

@@ -21,7 +21,7 @@ router.put(
   residentHandler.scheduleResidentMedicalAppointment
 );
 router.put(
-  "/appointment/status",
+  "/appointment/status/:appointmentId",
   residentHandler.changeMedicalAppointmentAttendedStatus
 );
 router.get(
@@ -29,4 +29,9 @@ router.get(
   residentHandler.getResidentsMedicalAppointment
 );
 router.delete("/medicalAppointment", residentHandler.deleteMedicalAppointment);
+
+router.put(
+  "/medicalAppointments/details/:appointmentId",
+  residentHandler.updateAppointmentDetails
+);
 module.exports = router;

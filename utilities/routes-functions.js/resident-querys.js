@@ -35,11 +35,10 @@ const getResidentDetailsByQueryString = function (
 };
 
 const generateAppointment = function (appointment, residentId) {
-  const resident = getResidentDetailsByQueryString([], residentId)[0];
   const newAppointment = new Appointment({
-    resident: resident,
     date: appointment.date,
     attended: false,
+    typeOfInspection:appointment.typeOfInspection
   });
   return newAppointment;
 };
@@ -90,6 +89,7 @@ const addContactToResident = async (residentId, newContact) => {
 
 const scheduleMedicalAppointment = async function (residentId, appointment) {
   const newAppointment = generateAppointment(appointment, residentId);
+  newAppointment.save()
   return Resident.findOneAndUpdate(
     { _id: residentId },
     { $push: { medicalAppointments: newAppointment } }

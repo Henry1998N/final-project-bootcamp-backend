@@ -1,4 +1,5 @@
 const residentQuery = require("../routes-functions.js/resident-querys");
+const appointmentQuires = require("../routes-functions.js/appointments-quires");
 const mongoose = require("mongoose");
 const getResidentDetailsByQueryString = async function (req, res) {
   try {
@@ -52,7 +53,7 @@ const scheduleResidentMedicalAppointment = async function (req, res) {
   try {
     const residentId = req.params.residentId;
     const { newAppointment } = req.body;
-    const responseMessage = await residentQuery.scheduleMedicalAppointment(
+    const responseMessage = await appointmentQuires.scheduleMedicalAppointment(
       residentId,
       newAppointment
     );
@@ -75,7 +76,7 @@ const getResidentsMedicalAppointment = async function (req, res) {
 const changeMedicalAppointmentAttendedStatus = async function (req, res) {
   try {
     const { appointmentId } = req.body;
-    await residentQuery.changeMedicalAppointmentStatus(appointmentId);
+    await appointmentQuires.changeMedicalAppointmentStatus(appointmentId);
     res.status(200).send({ message: "updated" });
   } catch (err) {
     res.status(404).send({ message: err.message });

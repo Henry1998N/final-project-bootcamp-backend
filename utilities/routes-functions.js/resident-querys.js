@@ -87,20 +87,20 @@ const addContactToResident = async (residentId, newContact) => {
     });
 };
 
-const scheduleMedicalAppointment = async function (residentId, appointment) {
-  const newAppointment = generateAppointment(appointment, residentId);
-  newAppointment.save();
-  return Resident.findOneAndUpdate(
-    { _id: residentId },
-    { $push: { medicalAppointments: newAppointment } }
-  )
-    .then(() => {
-      return "appointment Scheduled at " + newAppointment.date;
-    })
-    .catch((err) => {
-      return err.message;
-    });
-};
+// const scheduleMedicalAppointment = async function (residentId, appointment) {
+//   const newAppointment = generateAppointment(appointment);
+//   newAppointment.save();
+//   return Resident.findOneAndUpdate(
+//     { _id: residentId },
+//     { $push: { medicalAppointments: newAppointment } }
+//   )
+//     .then(() => {
+//       return "appointment Scheduled at " + newAppointment.date;
+//     })
+//     .catch((err) => {
+//       return err.message;
+//     });
+// };
 const getResidentMedicalAppointment = async function (residentId) {
   const resident = await getResidentDetailsByQueryString([], residentId);
   return Resident.findById(resident[0]._id, { medicalAppointments: 1 })
@@ -116,20 +116,20 @@ const getResidentMedicalAppointment = async function (residentId) {
       return err.message;
     });
 };
-const changeMedicalAppointmentStatus = async function (appointmentId) {
-  return Appointment.findOneAndUpdate(
-    { _id: appointmentId },
-    { attended: true }
-  ).catch((err) => {
-    return err.message;
-  });
-};
+// const changeMedicalAppointmentStatus = async function (appointmentId) {
+//   return Appointment.findOneAndUpdate(
+//     { _id: appointmentId },
+//     { attended: true }
+//   ).catch((err) => {
+//     return err.message;
+//   });
+// };
 module.exports = {
   generateResident,
   getResidentDetailsByQueryString,
   updateResidentMedication,
   addContactToResident,
-  scheduleMedicalAppointment,
+  // scheduleMedicalAppointment,
   getResidentMedicalAppointment,
-  changeMedicalAppointmentStatus,
+  // changeMedicalAppointmentStatus,
 };

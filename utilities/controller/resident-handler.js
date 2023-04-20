@@ -85,7 +85,7 @@ const changeMedicalAppointmentAttendedStatus = async function (req, res) {
 
 const deleteMedicalAppointment = async function (req, res) {
   try {
-    const { appointmentId } = req?.query;
+    const appointmentId = req.params.appointmentId;
     await appointmentQuires.deleteMedicalAppointment(appointmentId);
     res.status(204).end();
   } catch (err) {

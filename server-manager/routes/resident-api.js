@@ -28,7 +28,7 @@ router.get(
   "/medicalAppointment/:residentId",
   residentHandler.getResidentsMedicalAppointment
 );
-router.delete("/medicalAppointment", residentHandler.deleteMedicalAppointment);
+router.delete("/medicalAppointment/:appointmentId", residentHandler.deleteMedicalAppointment);
 
 router.put(
   "/medicalAppointments/details/:appointmentId",

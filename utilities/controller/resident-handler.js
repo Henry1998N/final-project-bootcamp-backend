@@ -96,11 +96,11 @@ const updateAppointmentDetails = async function (req, res) {
   try {
     const appointmentId = req.params.appointmentId;
     const { updatedAppointment } = req.body;
-    await appointmentQuires.updateAppointmentDetails(
+    let response = await appointmentQuires.updateAppointmentDetails(
       appointmentId,
       updatedAppointment
     );
-    res.status(200).send("updated");
+    res.status(200).send(response);
   } catch (err) {
     res.status(404).send(err.message);
   }

@@ -46,7 +46,7 @@ const updateAppointmentDetails = async function (
   };
   return Appointment.findOneAndUpdate(
     { _id: appointmentId },
-    { $set: fieldsToUpdate }
+    { $set: fieldsToUpdate }, {new: true}
   ).catch((err) => {
     return err.message;
   });

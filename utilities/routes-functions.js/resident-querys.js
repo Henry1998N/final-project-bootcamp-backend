@@ -34,16 +34,6 @@ const getResidentDetailsByQueryString = function (
   );
 };
 
-const generateAppointment = function (appointment, residentId) {
-  const resident = getResidentDetailsByQueryString([], residentId)[0];
-  const newAppointment = new Appointment({
-    resident: resident,
-    date: appointment.date,
-    attended: false,
-  });
-  return newAppointment;
-};
-
 const updateMedicineStatus = function (resident, period, medicationName) {
   const residentCopy = resident[0];
 
@@ -88,45 +78,26 @@ const addContactToResident = async (residentId, newContact) => {
     });
 };
 
-const scheduleMedicalAppointment = async function (residentId, appointment) {
-  const newAppointment = generateAppointment(appointment, residentId);
-  return Resident.findOneAndUpdate(
-    { _id: residentId },
-    { $push: { medicalAppointments: newAppointment } }
-  )
-    .then(() => {
-      return "appointment Scheduled at " + newAppointment.date;
-    })
-    .catch((err) => {
-      return err.message;
-    });
-};
 const getResidentMedicalAppointment = async function (residentId) {
   const resident = await getResidentDetailsByQueryString([], residentId);
   return Resident.findById(resident[0]._id, { medicalAppointments: 1 })
+    .sort()
     .populate("medicalAppointments")
     .then((appointments) => {
+      appointments.medicalAppointments.sort(
+        (a, b) => new Date(a.date) - new Date(b.date)
+      );
       return appointments;
     })
     .catch((err) => {
       return err.message;
     });
 };
-const changeMedicalAppointmentStatus = async function (appointmentId) {
-  console.log(appointmentId);
-  return Apartment.findOneAndUpdate(
-    { _id: appointmentId },
-    { attended: true }
-  ).catch((err) => {
-    return err.message;
-  });
-};
+
 module.exports = {
   generateResident,
   getResidentDetailsByQueryString,
   updateResidentMedication,
   addContactToResident,
-  scheduleMedicalAppointment,
   getResidentMedicalAppointment,
-  changeMedicalAppointmentStatus,
 };

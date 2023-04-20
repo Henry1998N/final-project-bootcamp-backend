@@ -1,4 +1,5 @@
 const residentQuery = require("../routes-functions.js/resident-querys");
+const appointmentQuires = require("../routes-functions.js/appointments-quires");
 const mongoose = require("mongoose");
 const getResidentDetailsByQueryString = async function (req, res) {
   try {
@@ -52,7 +53,7 @@ const scheduleResidentMedicalAppointment = async function (req, res) {
   try {
     const residentId = req.params.residentId;
     const { newAppointment } = req.body;
-    const responseMessage = await residentQuery.scheduleMedicalAppointment(
+    const responseMessage = await appointmentQuires.scheduleMedicalAppointment(
       residentId,
       newAppointment
     );
@@ -74,15 +75,34 @@ const getResidentsMedicalAppointment = async function (req, res) {
 };
 const changeMedicalAppointmentAttendedStatus = async function (req, res) {
   try {
-    const id = req.body.appointmentId;
-    if (mongoose.Types.ObjectId.isValid(id)) {
-      const response = await residentQuery.changeMedicalAppointmentStatus(id);
-      res.status(200).send({ message: "updated" });
-    } else {
-      res.status(400).send({ message: `${id} is not a valid ObjectId` });
-    }
+    const appointmentId = req.params.appointmentId;
+    await appointmentQuires.changeMedicalAppointmentStatus(appointmentId);
+    res.status(200).send({ message: "updated" });
   } catch (err) {
     res.status(404).send({ message: err.message });
+  }
+};
+
+const deleteMedicalAppointment = async function (req, res) {
+  try {
+    const { appointmentId } = req?.query;
+    await appointmentQuires.deleteMedicalAppointment(appointmentId);
+    res.status(204).end();
+  } catch (err) {
+    res.status(404).send({ message: err.message });
+  }
+};
+const updateAppointmentDetails = async function (req, res) {
+  try {
+    const appointmentId = req.params.appointmentId;
+    const { updatedAppointment } = req.body;
+    await appointmentQuires.updateAppointmentDetails(
+      appointmentId,
+      updatedAppointment
+    );
+    res.status(200).send("updated");
+  } catch (err) {
+    res.status(404).send(err.message);
   }
 };
 module.exports = {
@@ -92,4 +112,6 @@ module.exports = {
   scheduleResidentMedicalAppointment,
   getResidentsMedicalAppointment,
   changeMedicalAppointmentAttendedStatus,
+  deleteMedicalAppointment,
+  updateAppointmentDetails,
 };

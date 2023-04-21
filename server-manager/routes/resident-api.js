@@ -16,6 +16,14 @@ router.put(
   "/familyConnections/:residentId",
   residentHandler.addContactToResidentFamilyConnection
 );
+/*
+new relative: POST /resident/:residentId/familyConnection
+del relative: DELETE /resident/:residentId/familyConnection/:relativeId
+update: PUT /resident/:residentId/familyConnection/:relativeId
+GET ALL: GET /resident/:residentId/familyConnection
+Get specific relative: GET /resident/:residentId/familyConnection/:relativeId
+*/
+
 router.put(
   "/medicalAppointment/:residentId",
   residentHandler.scheduleResidentMedicalAppointment
@@ -28,7 +36,10 @@ router.get(
   "/medicalAppointment/:residentId",
   residentHandler.getResidentsMedicalAppointment
 );
-router.delete("/medicalAppointment/:appointmentId", residentHandler.deleteMedicalAppointment);
+router.delete(
+  "/medicalAppointment/:appointmentId",
+  residentHandler.deleteMedicalAppointment
+);
 
 router.put(
   "/medicalAppointments/details/:appointmentId",

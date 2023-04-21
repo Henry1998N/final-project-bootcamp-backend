@@ -8,6 +8,8 @@ const generateAppointment = function (appointment) {
   });
   return newAppointment;
 };
+//change to await and async
+//this file have to connect with the database only //DAL
 const scheduleMedicalAppointment = async function (residentId, appointment) {
   const newAppointment = generateAppointment(appointment);
   newAppointment.save();
@@ -46,7 +48,8 @@ const updateAppointmentDetails = async function (
   };
   return Appointment.findOneAndUpdate(
     { _id: appointmentId },
-    { $set: fieldsToUpdate }, {new: true}
+    { $set: fieldsToUpdate },
+    { new: true }
   ).catch((err) => {
     return err.message;
   });

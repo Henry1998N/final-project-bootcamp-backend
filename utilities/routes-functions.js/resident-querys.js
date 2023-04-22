@@ -95,20 +95,9 @@ const getResidentMedicalAppointment = async function (residentId) {
 };
 
 const deleteMedicalAppointment = async function (residentId, appointmentId) {
-  const residentMedicalAppointment = await getResidentDetailsByQueryString(
-    ["medicalAppointments"],
-    residentId
-  );
-  const appointmentIndex =
-    residentMedicalAppointment.medicalAppointments.findIndex(
-      (a) => a == appointmentId
-    );
-  residentMedicalAppointment.medicalAppointments.splice(appointmentIndex, 1);
-  const updatedMedicalAppointments =
-    residentMedicalAppointment.medicalAppointments;
-  Resident.findOneAndUpdate(
+  await Resident.findOneAndUpdate(
     { _id: residentId },
-    { $set: { medicalAppointments: updatedMedicalAppointments } }
+    { $pull: { medicalAppointments: { $eq: appointmentId } } }
   );
 };
 

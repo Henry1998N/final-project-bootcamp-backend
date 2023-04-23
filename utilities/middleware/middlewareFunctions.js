@@ -1,4 +1,6 @@
 const jwt = require("jsonwebtoken");
+require("dotenv").config(); // Load the .env file
+
 const checkServerConnection = (req, res) => {
   res.status(200).send("Connected to server");
 };

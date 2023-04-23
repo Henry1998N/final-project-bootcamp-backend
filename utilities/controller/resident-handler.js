@@ -1,5 +1,5 @@
 const residentQuery = require("../routes-functions.js/resident-queries");
-const appointmentQuires = require("../routes-functions.js/appointment-queries");
+const appointmentQuires = require("../routes-functions.js/appointments-queries");
 const getResidentDetailsByQueryString = async function (req, res) {
   try {
     const queryString = req?.query;

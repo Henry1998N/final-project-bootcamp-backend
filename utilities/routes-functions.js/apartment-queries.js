@@ -8,7 +8,7 @@ const generateApartment = function (apartment) {
 };
 
 const getApartmentsByInstructorId = async function (instructorId) {
-  return Instructor.findOne({ instructorId: instructorId }, { apartments: 1 })
+  return Instructor.findOne({ _id: instructorId }, { apartments: 1 })
     .populate("apartments")
     .then((data) => {
       return data.apartments;

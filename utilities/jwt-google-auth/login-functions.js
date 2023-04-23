@@ -4,13 +4,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config(); // Load the .env file
 
 const secretKey = process.env.SECRET_KEY;
-const Instructor = require("../../server/models/instructor");
-
-const getInstructor = async function (email) {
-  return Instructor.find({ email: email }).then((instructor) => {
-    return instructor;
-  });
-};
+const { getInstructor } = require("../routes-functions.js/instructor-queries");
 async function validateUser(email, password) {
   const instructor = await getInstructor(email);
   const user = instructor[0];

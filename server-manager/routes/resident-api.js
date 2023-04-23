@@ -5,7 +5,11 @@ const {
   authenticateUser,
 } = require("../../utilities/middleware/middlewareFunctions");
 router.use(authenticateUser);
-router.get("/:id", residentHandler.getResidentDetailsByQueryString);
+router.get(
+  "/:id",
+
+  residentHandler.getResidentDetailsByQueryString
+);
 // router.post("/residents", function (req, res) {
 //   const resident = req.body.resident;
 //   residentsQuery.generateResident(resident);

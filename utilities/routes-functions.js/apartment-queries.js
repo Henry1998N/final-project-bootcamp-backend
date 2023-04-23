@@ -7,7 +7,7 @@ const generateApartment = function (apartment) {
   newApartment.save();
 };
 
-const getApartmentsByInstructorId = function (instructorId) {
+const getApartmentsByInstructorId = async function (instructorId) {
   return Instructor.findOne({ instructorId: instructorId }, { apartments: 1 })
     .populate("apartments")
     .then((data) => {
@@ -15,7 +15,7 @@ const getApartmentsByInstructorId = function (instructorId) {
     });
 };
 
-const getResidentsByApartmentName = function (apartmentName) {
+const getResidentsByApartmentName = async function (apartmentName) {
   return Apartment.findOne({ apartmentName: apartmentName }, { residents: 1 })
     .populate("residents")
     .then((data) => {
@@ -23,14 +23,14 @@ const getResidentsByApartmentName = function (apartmentName) {
     });
 };
 
-const getAllApartments = function () {
+const getAllApartments = async function () {
   return Apartment.find({}).then((apartments) => {
     return apartments;
   });
 };
 
 const getApartmentByName = async function (apartmentName) {
-  let apartment = await Apartment.findOne({ apartmentName: apartmentName })
+  let apartment = await Apartment.findOne({ apartmentName: apartmentName });
   return apartment;
 };
 

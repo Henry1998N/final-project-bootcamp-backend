@@ -12,7 +12,7 @@ const getInstructor = async function (email) {
   });
 };
 async function validateUser(email, password) {
-  const instructor = await getInstructor();
+  const instructor = await getInstructor(email);
   const user = instructor[0];
   if (!user) {
     return null;
@@ -21,7 +21,7 @@ async function validateUser(email, password) {
   if (!isPasswordValid) {
     return null;
   }
-  return { id: user.id, email: user.email, name: user.name };
+  return { id: user._id, email: user.email, name: user.name };
 }
 const generateToken = function (email, id, name) {
   const payload = { email, id, name };

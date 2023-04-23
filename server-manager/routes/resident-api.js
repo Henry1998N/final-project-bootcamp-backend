@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const residentHandler = require("../../utilities/controller/resident-handler");
+const {
+  authenticateUser,
+} = require("../../utilities/middleware/middlewareFunctions");
+router.use(authenticateUser);
 router.get("/:id", residentHandler.getResidentDetailsByQueryString);
 // router.post("/residents", function (req, res) {
 //   const resident = req.body.resident;

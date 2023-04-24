@@ -13,4 +13,9 @@ const signIn = async function (req, res) {
     res.status(401).send({ message: "Failure" });
   }
 };
-module.exports = { signIn };
+const addInstructor = async function (req, res) {
+  try {
+    const { instructor } = req.body;
+  } catch (err) {}
+};
+module.exports = { signIn, addInstructor };

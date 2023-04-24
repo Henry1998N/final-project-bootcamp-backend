@@ -13,6 +13,7 @@ const {
 const apartmentApi = require("./server-manager/routes/apartment-api");
 const instructorApi = require("./server-manager/routes/instructor-api");
 const residentApi = require("./server-manager/routes/resident-api");
+const coordinatorRoutes = require("./server-manager/routes/coordinator-routes");
 
 connectToDatabase();
 //todo:septate to module
@@ -24,6 +25,7 @@ app.use("/", apartmentApi);
 app.use("/status", checkServerConnection);
 app.use("/instructor", instructorApi);
 app.use("/resident", residentApi);
+app.use("/coordinator", coordinatorRoutes);
 
 app.listen(process.env.PORT || constant.PORT, function () {
   console.log("server up and running on port " + constant.PORT);

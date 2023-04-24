@@ -53,7 +53,4 @@ router.put(
   "/medicalAppointments/details/:appointmentId",
   residentHandler.updateAppointmentDetails
 );
-
-router.post('/contact', residentHandler.sendMessageToResidentContact)
-
 module.exports = router;

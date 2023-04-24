@@ -119,7 +119,7 @@ const sendMessageToResidentContact = async (req, res) => {
       .create({
         from: "whatsapp:+14155238886",
         body: `${MessageInformation.body}`,
-        to: `whatsapp:${MessageInformation.contactNumber}`,
+        to: `whatsapp:+972528156396`,
       })
       .then((message) => res.status(200).send({message: 'Message was sent successfully'}));
   } catch (error) {

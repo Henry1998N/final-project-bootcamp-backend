@@ -1,5 +1,5 @@
-const residentQuery = require("../routes-functions.js/resident-querys");
-const appointmentQuires = require("../routes-functions.js/appointments-quires");
+const residentQuery = require("../routes-functions.js/resident-queries");
+const appointmentQuires = require("../routes-functions.js/appointments-queries");
 require("dotenv").config(); // Load the .env file
 
 const getResidentDetailsByQueryString = async function (req, res) {

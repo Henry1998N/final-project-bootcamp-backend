@@ -48,6 +48,7 @@ const addContactToResidentFamilyConnection = async function (req, res) {
     res.status(404).send({ message: err.message });
   }
 };
+///change to add
 
 const scheduleResidentMedicalAppointment = async function (req, res) {
   try {
@@ -85,8 +86,10 @@ const changeMedicalAppointmentAttendedStatus = async function (req, res) {
 
 const deleteMedicalAppointment = async function (req, res) {
   try {
-    const { appointmentId } = req?.query;
+    const appointmentId = req.params.appointmentId;
+    const { residentId } = req?.query;
     await appointmentQuires.deleteMedicalAppointment(appointmentId);
+    await residentQuery.deleteMedicalAppointment(residentId, appointmentId);
     res.status(204).end();
   } catch (err) {
     res.status(404).send({ message: err.message });
@@ -96,11 +99,11 @@ const updateAppointmentDetails = async function (req, res) {
   try {
     const appointmentId = req.params.appointmentId;
     const { updatedAppointment } = req.body;
-    await appointmentQuires.updateAppointmentDetails(
+    let response = await appointmentQuires.updateAppointmentDetails(
       appointmentId,
       updatedAppointment
     );
-    res.status(200).send("updated");
+    res.status(200).send(response);
   } catch (err) {
     res.status(404).send(err.message);
   }

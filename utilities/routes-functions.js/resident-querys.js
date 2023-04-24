@@ -94,10 +94,18 @@ const getResidentMedicalAppointment = async function (residentId) {
     });
 };
 
+const deleteMedicalAppointment = async function (residentId, appointmentId) {
+  await Resident.findOneAndUpdate(
+    { _id: residentId },
+    { $pull: { medicalAppointments: { $eq: appointmentId } } }
+  );
+};
+
 module.exports = {
   generateResident,
   getResidentDetailsByQueryString,
   updateResidentMedication,
   addContactToResident,
   getResidentMedicalAppointment,
+  deleteMedicalAppointment,
 };

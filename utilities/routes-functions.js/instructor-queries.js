@@ -26,9 +26,9 @@ const addInstructor = async function (instructor) {
   newInstructor.save();
   generateUser(
     {
-      id: coordinator.id,
-      email: coordinator.email,
-      password: coordinator.password,
+      id: newInstructor.instructorId,
+      email: newInstructor.email,
+      password: newInstructor.password,
     },
     "Instructor"
   );

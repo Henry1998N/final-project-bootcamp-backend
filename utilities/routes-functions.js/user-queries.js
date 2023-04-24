@@ -9,4 +9,8 @@ const generateUser = function (user, userType) {
   });
   newUser.save();
 };
-module.exports = { generateUser };
+const findUser = async function (userEmail) {
+  const users = await User.find({ email: userEmail });
+  return users;
+};
+module.exports = { generateUser, findUser };

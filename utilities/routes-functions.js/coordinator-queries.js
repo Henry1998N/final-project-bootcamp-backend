@@ -1,9 +1,11 @@
 const Coordinator = require("../../server-manager/models/coordinator");
-
+const bcrypt = require("bcrypt");
+require("dotenv").config();
+const salt = bcrypt.genSaltSync(parseInt(process.env.SALT_ROUNDS));
 const generateCoordinator = function (newCoordinator) {
   const coordinator = new Coordinator({
     email: newCoordinator.email,
-    password: newCoordinator.password,
+    password: bcrypt.hashSync(newCoordinator.password, salt),
     fullName: newCoordinator.fullName,
     id: newCoordinator.id,
     phoneNumber: newCoordinator.phoneNumber,

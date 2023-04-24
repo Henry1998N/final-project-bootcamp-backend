@@ -2,11 +2,6 @@ const Instructor = require("../../server-manager/models/instructor");
 const Apartment = require("../../server-manager/models/apartment");
 const Resident = require("../../server-manager/models/resident");
 
-const generateApartment = function (apartment) {
-  const newApartment = new Apartment({ name: apartment.name });
-  newApartment.save();
-};
-
 const getApartmentsByInstructorId = async function (instructorId) {
   return Instructor.findOne({ _id: instructorId }, { apartments: 1 })
     .populate("apartments")
@@ -33,14 +28,25 @@ const getApartmentByName = async function (apartmentName) {
   let apartment = await Apartment.findOne({ apartmentName: apartmentName });
   return apartment;
 };
-
+const generateApartment = function (apartment) {
+  const newApartment = new Apartment({
+    apartmentName: apartment.apartmentName,
+    address: apartment.address,
+    budget: apartment.budget,
+    residents: [],
+    meals: [],
+  });
+  return newApartment;
+};
+const addNewApartment = async function (apartment) {
+  const newApartment = generateApartment(apartment);
+  newApartment.save();
+};
 module.exports = {
   getApartmentsByInstructorId,
-
   generateApartment,
-
   getResidentsByApartmentName,
-
   getAllApartments,
   getApartmentByName,
+  addNewApartment,
 };

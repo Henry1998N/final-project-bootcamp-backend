@@ -1,5 +1,7 @@
 const Instructor = require("../../server-manager/models/instructor");
 const bcrypt = require("bcrypt");
+const { generateUser } = require("../routes-functions.js/user-queries");
+
 require("dotenv").config();
 const salt = bcrypt.genSaltSync(parseInt(process.env.SALT_ROUNDS));
 const generateInstructor = function (instructor) {
@@ -17,11 +19,20 @@ const generateInstructor = function (instructor) {
 };
 const addInstructor = async function (instructor) {
   const instructors = await getInstructor(instructor.email);
-  if (instructor.length > 0) {
+  if (instructors.length > 0) {
     return null;
   }
   const newInstructor = generateInstructor(instructor);
   newInstructor.save();
+  generateUser(
+    {
+      id: coordinator.id,
+      email: coordinator.email,
+      password: coordinator.password,
+    },
+    "Instructor"
+  );
+
   return newInstructor;
 };
 

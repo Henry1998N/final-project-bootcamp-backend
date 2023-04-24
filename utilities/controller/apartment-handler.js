@@ -42,12 +42,19 @@ const getApartmentByName = async function (req, res) {
     res.status(409).send({ message: "apartmentName undefined", error: err });
   }
 };
-
+const addApartment = async function (req, res) {
+  try {
+    const { apartment } = req.body;
+    await apartmentQueries.addNewApartment(apartment);
+    res.status(201).send({ message: "created" });
+  } catch (err) {}
+};
 module.exports = {
   getApartmentsByInstructorId,
   getResidentsByApartmentName,
   getApartments,
   getApartmentByName,
+  addApartment,
 };
 // router.post("/apartment", function (req, res) {
 //   const apartment = req.body.apartment;

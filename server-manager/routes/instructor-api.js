@@ -1,5 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const instructorQuerys = require("../../utilities/routes-functions.js/instructor-querys");
-
+const instructorHandler = require("../../utilities/controller/instructor-handler");
+router.post("/sign-in", instructorHandler.signIn);
 module.exports = router;

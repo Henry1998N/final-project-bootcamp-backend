@@ -1,5 +1,7 @@
-const residentQuery = require("../routes-functions.js/resident-queries");
-const appointmentQuires = require("../routes-functions.js/appointments-queries");
+const residentQuery = require("../routes-functions.js/resident-querys");
+const appointmentQuires = require("../routes-functions.js/appointments-quires");
+require("dotenv").config(); // Load the .env file
+
 const getResidentDetailsByQueryString = async function (req, res) {
   try {
     const queryString = req?.query;
@@ -107,6 +109,23 @@ const updateAppointmentDetails = async function (req, res) {
     res.status(404).send(err.message);
   }
 };
+
+const sendMessageToResidentContact = async (req, res) => {
+  try {
+    let MessageInformation = req.body
+    const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+    client.messages
+      .create({
+        from: "whatsapp:+14155238886",
+        body: `${MessageInformation.body}`,
+        to: `whatsapp:+972528156396`,
+      })
+      .then((message) => res.status(200).send({message: 'Message was sent successfully'}));
+  } catch (error) {
+    res.status(404).send({message: "Oops, something went wrong!"})
+  }
+};
+
 module.exports = {
   getResidentDetailsByQueryString,
   updateResidentMedicationByMedicationName,
@@ -116,4 +135,5 @@ module.exports = {
   changeMedicalAppointmentAttendedStatus,
   deleteMedicalAppointment,
   updateAppointmentDetails,
+  sendMessageToResidentContact,
 };

@@ -4,6 +4,7 @@ const {
 } = require("../jwt-google-auth/login-functions");
 const {
   addInstructor,
+  updateInstructorApartmentsById,
 } = require("../../utilities/routes-functions.js/instructor-queries");
 const signIn = async function (req, res) {
   const { email, password } = req.body;
@@ -26,4 +27,23 @@ const addNewInstructor = async function (req, res) {
     res.status(201).send({ message: "created" });
   } catch (err) {}
 };
-module.exports = { signIn, addNewInstructor };
+const updateInstructorApartments = async function (req, res) {
+  try {
+    const { instructorId, apartmentId } = req.body;
+
+    const response = await updateInstructorApartmentsById(
+      instructorId,
+      apartmentId
+    );
+    if (!response) {
+      res.status(401).send({ message: "error with the updating" });
+      return;
+    }
+    res
+      .status(200)
+      .send({ message: "updated successfully", apartments: response });
+  } catch (err) {
+    res.status(401).send({ message: err.message });
+  }
+};
+module.exports = { signIn, addNewInstructor, updateInstructorApartments };

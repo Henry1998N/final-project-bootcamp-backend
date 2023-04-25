@@ -3,6 +3,7 @@ const router = express.Router();
 const {
   signIn,
   addNewInstructor,
+  updateInstructorApartments,
 } = require("../../utilities/controller/instructor-handler");
 const {
   googleLogin,
@@ -10,4 +11,5 @@ const {
 router.post("/sign-in", signIn);
 router.post("/auth/google-login", googleLogin);
 router.post("/instructors", addNewInstructor);
+router.post("/instructorApartment", updateInstructorApartments);
 module.exports = router;

@@ -6,6 +6,7 @@ const generateUser = function (user, userType) {
     password: user.password,
     id: user.id,
     type: userType,
+    ref: user.objId,
   });
   newUser.save();
 };

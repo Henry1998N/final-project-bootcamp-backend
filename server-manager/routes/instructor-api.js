@@ -8,6 +8,10 @@ const {
 const {
   googleLogin,
 } = require("../../utilities/jwt-google-auth/google-Handler");
+const {
+  authenticateUser,
+} = require("../../utilities/middleware/middlewareFunctions");
+// router.use(authenticateUser);
 router.post("/sign-in", signIn);
 router.post("/auth/google-login", googleLogin);
 router.post("/instructors", addNewInstructor);

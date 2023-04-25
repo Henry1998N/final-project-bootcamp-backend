@@ -56,8 +56,18 @@ const addInstructor = async function (coordinatorId, instructorId) {
     $push: { instructors: instructorId },
   });
 };
+const getInstructors = async function (coordinatorId) {
+  return Coordinator.findById(coordinatorId).populate({
+    path: "instructors",
+    populate: {
+      path: "apartments",
+      model: "Apartment",
+    },
+  });
+};
 module.exports = {
   saveCoordinator,
   addInstructor,
   getCoordinatorApartmentsByInstructors,
+  getInstructors,
 };

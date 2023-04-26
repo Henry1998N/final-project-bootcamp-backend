@@ -105,7 +105,7 @@ const addNewResident = async function (
   firstName,
   lastName,
   dateOfBirth,
-  adress,
+  address,
   budget,
   gender,
   residentId,

@@ -4,6 +4,8 @@ const {
   signIn,
   addNewInstructor,
   updateInstructorApartments,
+  updateInstructor,
+  deleteInstructor
 } = require("../../utilities/controller/instructor-handler");
 const {
   googleLogin,
@@ -16,4 +18,6 @@ router.post("/sign-in", signIn);
 router.post("/auth/google-login", googleLogin);
 router.post("/instructors", addNewInstructor);
 router.post("/instructorApartment", updateInstructorApartments);
+router.put('/:instructorId', updateInstructor)
+router.delete('/:instructorId', deleteInstructor)
 module.exports = router;

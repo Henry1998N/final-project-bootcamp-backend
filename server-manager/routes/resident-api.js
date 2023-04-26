@@ -53,4 +53,10 @@ router.put(
   "/medicalAppointments/details/:appointmentId",
   residentHandler.updateAppointmentDetails
 );
+
+router.post(
+  "/",
+  residentHandler.addNewResident
+);
+
 module.exports = router;

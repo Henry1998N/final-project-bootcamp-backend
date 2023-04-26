@@ -101,6 +101,36 @@ const deleteMedicalAppointment = async function (residentId, appointmentId) {
   );
 };
 
+const addNewResident = async function (
+  firstName,
+  lastName,
+  dateOfBirth,
+  adress,
+  budget,
+  gender,
+  residentId,
+  filename
+) {
+  const newResident = new Resident({
+    residentId: residentId,
+    firstName: firstName,
+    lastName: lastName,
+    dateOfBirth: dateOfBirth,
+    gender: gender,
+    image: {
+      data: filename,
+      contentType: "image/png",
+    },
+    address: address,
+    budget: budget,
+    medication: [],
+    allergies: [],
+    medicalAppointments: [],
+    familyConnections: [],
+  });
+  newResident.save();
+};
+
 module.exports = {
   generateResident,
   getResidentDetailsByQueryString,
@@ -108,4 +138,5 @@ module.exports = {
   addContactToResident,
   getResidentMedicalAppointment,
   deleteMedicalAppointment,
+  addNewResident,
 };

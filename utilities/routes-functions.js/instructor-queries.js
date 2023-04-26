@@ -14,6 +14,7 @@ const generateInstructor = function (instructor) {
     phoneNumber: instructor.phoneNumber,
     password: bcrypt.hashSync(instructor.password, salt),
     reports: [],
+    image: instructor.image,
   });
   return newInstructor;
 };

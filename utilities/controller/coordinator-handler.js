@@ -2,6 +2,7 @@ const {
   saveCoordinator,
   addInstructor,
   getCoordinatorApartmentsByInstructors,
+  getInstructors,
 } = require("../routes-functions.js/coordinator-queries");
 const { filterApartments } = require("../routes-functions.js/helperFunctions");
 const addCoordinator = async function (req, res) {
@@ -46,4 +47,22 @@ const getCoordinatorApartments = async function (req, res) {
     res.status(500).send({ message: err.message });
   }
 };
-module.exports = { addCoordinator, addNewInstructor, getCoordinatorApartments };
+const getInstructorsByCoordinatorId = async function (req, res) {
+  try {
+    const coordinatorId = req.params.id;
+    const response = await getInstructors(coordinatorId);
+    if (!response) {
+      res.status(400).send({ message: "mongo error" });
+      return;
+    }
+    res.status(200).send(response);
+  } catch (err) {
+    [];
+  }
+};
+module.exports = {
+  addCoordinator,
+  addNewInstructor,
+  getCoordinatorApartments,
+  getInstructorsByCoordinatorId,
+};

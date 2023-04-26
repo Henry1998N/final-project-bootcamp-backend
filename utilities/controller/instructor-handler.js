@@ -24,13 +24,12 @@ const addNewInstructor = async function (req, res) {
       res.status(409).send({ message: "user already exist" });
       return;
     }
-    res.status(201).send({ message: "created" });
+    res.status(200).send({ data: response });
   } catch (err) {}
 };
 const updateInstructorApartments = async function (req, res) {
   try {
     const { instructorId, apartmentId } = req.body;
-
     const response = await updateInstructorApartmentsById(
       instructorId,
       apartmentId

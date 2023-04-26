@@ -10,6 +10,7 @@ const instructorSchema = new Schema({
   phoneNumber: String,
   password: String,
   reports: [{ type: Schema.Types.ObjectId, ref: "Report" }], //apartmentId
+  image: String,
 });
 
 const Instructor = mongoose.model("Instructor", instructorSchema);

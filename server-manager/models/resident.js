@@ -7,7 +7,10 @@ const residentSchema = new Schema({
   lastName: String,
   dateOfBirth: Date,
   gender: String,
-  image: String,
+  image: {
+    data: Buffer,
+    contentType: String
+  },
   address: Object,
   budget: Number,
   medication: Object,

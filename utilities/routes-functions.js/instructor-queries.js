@@ -14,6 +14,7 @@ const generateInstructor = function (instructor) {
     phoneNumber: instructor.phoneNumber,
     password: bcrypt.hashSync(instructor.password, salt),
     reports: [],
+    image: instructor.image,
   });
   return newInstructor;
 };
@@ -29,6 +30,7 @@ const addInstructor = async function (instructor) {
       id: newInstructor.instructorId,
       email: newInstructor.email,
       password: newInstructor.password,
+      objId: newInstructor._id,
     },
     "Instructor"
   );
@@ -41,4 +43,20 @@ const getInstructor = async function (email) {
     return instructor;
   });
 };
-module.exports = { getInstructor, addInstructor };
+const updateInstructorApartmentsById = async function (
+  instructorId,
+  apartmentId
+) {
+  return await Instructor.findByIdAndUpdate(
+    instructorId,
+    {
+      $push: { apartments: apartmentId },
+    },
+    { new: true }
+  );
+};
+module.exports = {
+  getInstructor,
+  addInstructor,
+  updateInstructorApartmentsById,
+};

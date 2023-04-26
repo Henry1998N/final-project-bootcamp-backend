@@ -16,7 +16,13 @@ async function validateUser(email, password) {
   if (!isPasswordValid) {
     return null;
   }
-  return { id: user._id, email: user.email, name: user.name, type: user.type };
+  return {
+    id: user._id,
+    email: user.email,
+    name: user.name,
+    type: user.type,
+    ref: user.ref,
+  };
 }
 const generateToken = function (email, id, name) {
   const payload = { email, id, name };

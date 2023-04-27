@@ -5,6 +5,8 @@ const {
 const {
   addInstructor,
   updateInstructorApartmentsById,
+  updateInstructorById,
+  deleteInstructorById
 } = require("../../utilities/routes-functions.js/instructor-queries");
 const signIn = async function (req, res) {
   const { email, password } = req.body;
@@ -45,4 +47,43 @@ const updateInstructorApartments = async function (req, res) {
     res.status(401).send({ message: err.message });
   }
 };
-module.exports = { signIn, addNewInstructor, updateInstructorApartments };
+
+const updateInstructor = async function (req, res) {
+  try {
+    const instructorId = req.params.instructorId;
+    const response = await updateInstructorById(
+      instructorId,
+      req.query.name,
+      req.query.phoneNumber,
+    );
+    if (!response) {
+      res.status(401).send({ message: "error with the updating" });
+      return;
+    }
+    res
+      .status(200)
+      .send({ message: "updated successfully", apartments: response });
+  } catch (err) {
+    res.status(401).send({ message: err.message });
+  }
+};
+
+const deleteInstructor = async function (req, res) {
+  try {
+    const instructorId = req.params.instructorId;
+    const response = await deleteInstructorById(
+      instructorId,
+    );
+    if (!response) {
+      res.status(401).send({ message: "error with the deleting" });
+      return;
+    }
+    res
+      .status(200)
+      .send({ message: "deleted successfully", apartments: response });
+  } catch (err) {
+    res.status(401).send({ message: err.message });
+  }
+};
+
+module.exports = { signIn, addNewInstructor, updateInstructorApartments, updateInstructor, deleteInstructor };

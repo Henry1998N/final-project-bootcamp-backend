@@ -55,8 +55,31 @@ const updateInstructorApartmentsById = async function (
     { new: true }
   );
 };
+
+const updateInstructorById = async function (
+  instructorId,
+  name,
+  phoneNumber
+) {
+  return await Instructor.findOneAndUpdate(
+    {instructorId: instructorId},
+    {
+      name: name,
+      phoneNumber: phoneNumber
+    },
+    { new: true }
+  );
+};
+
+const deleteInstructorById = async function (
+  instructorId,
+) {
+  return await Instructor.deleteOne({intructorId: instructorId})
+};
 module.exports = {
   getInstructor,
   addInstructor,
   updateInstructorApartmentsById,
+  updateInstructorById,
+  deleteInstructorById,
 };

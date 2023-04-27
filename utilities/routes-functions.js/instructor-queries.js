@@ -71,7 +71,7 @@ const updateInstructorById = async function (instructorId, name, phoneNumber) {
 };
 
 const deleteInstructorById = async function (instructorId) {
-  return await Instructor.deleteOne({ intructorId: instructorId });
+  return await Instructor.findByIdAndDelete(instructorId);
 };
 const getInstructorById = async function (instructorId) {
   return Instructor.findById(instructorId);

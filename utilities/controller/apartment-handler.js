@@ -49,12 +49,26 @@ const addApartment = async function (req, res) {
     res.status(201).send({ message: "created" });
   } catch (err) {}
 };
+const getApartmentNameById = async function (req, res) {
+  try {
+    const apartmentId = req.params.id;
+    const response = await apartmentQueries.getApartmentName(apartmentId);
+    if (!response) {
+      res.status(400).send({ message: "Failed" });
+      return;
+    }
+    res.status(200).send(response);
+  } catch (err) {
+    res.status(500).send({ message: "server error" });
+  }
+};
 module.exports = {
   getApartmentsByInstructorId,
   getResidentsByApartmentName,
   getApartments,
   getApartmentByName,
   addApartment,
+  getApartmentNameById,
 };
 // router.post("/apartment", function (req, res) {
 //   const apartment = req.body.apartment;

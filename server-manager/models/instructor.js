@@ -11,6 +11,7 @@ const instructorSchema = new Schema({
   password: String,
   reports: [{ type: Schema.Types.ObjectId, ref: "Report" }], //apartmentId
   image: String,
+  shifts: [{ type: Schema.Types.ObjectId, ref: "Shift" }],
 });
 
 const Instructor = mongoose.model("Instructor", instructorSchema);

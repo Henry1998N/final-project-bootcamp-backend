@@ -4,6 +4,8 @@ const {
   signIn,
   addNewInstructor,
   updateInstructorApartments,
+  addShift,
+  getInstructorShiftsById,
 } = require("../../utilities/controller/instructor-handler");
 const {
   googleLogin,
@@ -16,4 +18,7 @@ router.post("/sign-in", signIn);
 router.post("/auth/google-login", googleLogin);
 router.post("/instructors", addNewInstructor);
 router.post("/instructorApartment", updateInstructorApartments);
+router.post("/shifts/:instructorId", addShift);
+router.get("/shifts/:id", getInstructorShiftsById);
+
 module.exports = router;

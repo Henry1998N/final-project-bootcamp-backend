@@ -5,7 +5,11 @@ const {
 const {
   addInstructor,
   updateInstructorApartmentsById,
+  getInstructorById,
+  getInstructorShifts,
 } = require("../../utilities/routes-functions.js/instructor-queries");
+const { createShift } = require("../routes-functions.js/shift-queries");
+
 const signIn = async function (req, res) {
   const { email, password } = req.body;
   const user = await validateUser(email, password);
@@ -45,4 +49,50 @@ const updateInstructorApartments = async function (req, res) {
     res.status(401).send({ message: err.message });
   }
 };
-module.exports = { signIn, addNewInstructor, updateInstructorApartments };
+const addShift = async function (req, res) {
+  try {
+    const instructorId = req.params.instructorId;
+    const { coordinatorId, shift, selectedInstructor, selectedApartment } =
+      req.body;
+
+    const instructor = await getInstructorById(instructorId);
+    const newShift = await createShift(
+      coordinatorId,
+      selectedInstructor.id,
+      shift,
+      selectedApartment.id
+    );
+
+    await newShift.save();
+
+    instructor.shifts.push(newShift._id);
+    await instructor.save();
+
+    res
+      .status(200)
+      .json({ success: true, message: "Shift created successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Error creating shift" });
+  }
+};
+const getInstructorShiftsById = async function (req, res) {
+  try {
+    const instructorId = req.params.id;
+    const response = await getInstructorShifts(instructorId);
+    if (!response) {
+      res.status(401).send({ message: "failed" });
+      return;
+    }
+    res.status(200).send(response.shifts);
+  } catch (err) {
+    res.status(500).send({ message: "server error" });
+  }
+};
+module.exports = {
+  signIn,
+  addNewInstructor,
+  updateInstructorApartments,
+  addShift,
+  getInstructorShiftsById,
+};

@@ -1,9 +1,10 @@
+require("dotenv").config();
 const Instructor = require("../../server-manager/models/instructor");
 const bcrypt = require("bcrypt");
 const { generateUser } = require("../routes-functions.js/user-queries");
 
-require("dotenv").config();
 const salt = bcrypt.genSaltSync(parseInt(process.env.SALT_ROUNDS));
+
 const generateInstructor = function (instructor) {
   const newInstructor = new Instructor({
     instructorId: instructor.instructorId,
@@ -18,6 +19,7 @@ const generateInstructor = function (instructor) {
   });
   return newInstructor;
 };
+
 const addInstructor = async function (instructor) {
   const instructors = await getInstructor(instructor.email);
   if (instructors.length > 0) {
@@ -43,6 +45,7 @@ const getInstructor = async function (email) {
     return instructor;
   });
 };
+
 const updateInstructorApartmentsById = async function (
   instructorId,
   apartmentId
@@ -56,25 +59,26 @@ const updateInstructorApartmentsById = async function (
   );
 };
 
-const updateInstructorById = async function (
-  instructorId,
-  name,
-  phoneNumber
-) {
+const updateInstructorById = async function (instructorId, name, phoneNumber) {
   return await Instructor.findOneAndUpdate(
-    {instructorId: instructorId},
+    { instructorId: instructorId },
     {
       name: name,
-      phoneNumber: phoneNumber
+      phoneNumber: phoneNumber,
     },
     { new: true }
   );
 };
 
-const deleteInstructorById = async function (
-  instructorId,
-) {
-  return await Instructor.deleteOne({intructorId: instructorId})
+const deleteInstructorById = async function (instructorId) {
+  return await Instructor.deleteOne({ intructorId: instructorId });
+};
+const getInstructorById = async function (instructorId) {
+  return Instructor.findById(instructorId);
+};
+const getInstructorShifts = async function (instructorId) {
+  const shifts = await Instructor.findById(instructorId).populate("shifts");
+  return shifts;
 };
 module.exports = {
   getInstructor,
@@ -82,4 +86,6 @@ module.exports = {
   updateInstructorApartmentsById,
   updateInstructorById,
   deleteInstructorById,
+  getInstructorById,
+  getInstructorShifts,
 };

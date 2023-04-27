@@ -11,6 +11,7 @@ const filterApartments = function (coordinator) {
         residents: apartment.residents,
         image: apartment._doc.image,
         instructorId: instructor._id,
+        instructorName: instructor._doc.name,
       });
     });
   });

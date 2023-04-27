@@ -28,7 +28,6 @@ const getDate = function (newDate) {
   );
   const timezoneOffset = date.getTimezoneOffset();
   date.setUTCMinutes(date.getUTCMinutes() - timezoneOffset);
-  console.log(date);
   return date;
 };
 

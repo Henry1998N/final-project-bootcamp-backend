@@ -8,6 +8,7 @@ const {
   updateInstructorById,
   deleteInstructorById,
   getInstructorShifts,
+  getInstructorById,
 } = require("../../utilities/routes-functions.js/instructor-queries");
 const { createShift } = require("../routes-functions.js/shift-queries");
 
@@ -87,13 +88,6 @@ const deleteInstructor = async function (req, res) {
   }
 };
 
-module.exports = {
-  signIn,
-  addNewInstructor,
-  updateInstructorApartments,
-  updateInstructor,
-  deleteInstructor,
-};
 const addShift = async function (req, res) {
   try {
     const instructorId = req.params.instructorId;
@@ -140,4 +134,6 @@ module.exports = {
   updateInstructorApartments,
   addShift,
   getInstructorShiftsById,
+  updateInstructor,
+  deleteInstructor,
 };

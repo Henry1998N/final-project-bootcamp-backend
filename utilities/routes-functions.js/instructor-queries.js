@@ -83,7 +83,7 @@ const getInstructorShifts = async function (instructorId) {
 }
 
 const getInstructorApartments = async function (instructorId) {
-    const apartments = await Instructor.findOne({ instructorId }).populate(
+    const apartments = await Instructor.findOne({ _id: instructorId }).populate(
         'apartments'
     )
     return apartments

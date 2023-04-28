@@ -156,7 +156,7 @@ const getResidentsByInstructorId = async function (req, res) {
             )
             instructorResidents.push(...apartmentResidents)
         }
-        res.status(200).send({ instructorResidents })
+        res.status(200).send(instructorResidents)
     } catch (error) {
         console.error(error)
         res.status(500).json({ message: 'Internal server error' })

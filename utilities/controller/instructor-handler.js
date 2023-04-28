@@ -45,4 +45,15 @@ const updateInstructorApartments = async function (req, res) {
     res.status(401).send({ message: err.message });
   }
 };
-module.exports = { signIn, addNewInstructor, updateInstructorApartments };
+
+const addNewReport = async function(req, res) {
+  // try{
+  //   const { instructorId, report} = req.body
+  //   const response = await 
+  // }
+  // catch(err) {
+  //   res.status(401).send({ message: err.message });
+  // }
+}
+
+module.exports = { signIn, addNewInstructor, updateInstructorApartments, addNewReport };

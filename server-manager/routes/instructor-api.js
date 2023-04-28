@@ -10,6 +10,7 @@ const {
   addShift,
   getInstructorShiftsById,
   getResidentsMedicalAppointments,
+  getResidentsByInstructorId,
 } = require("../../utilities/controller/instructor-handler");
 const {
   googleLogin,
@@ -30,5 +31,5 @@ router.get(
   "/residents/medicalAppointments/:instructorId",
   getResidentsMedicalAppointments
 );
-
+router.get('/residents/:id', getResidentsByInstructorId)
 module.exports = router;

@@ -17,5 +17,4 @@ const filterApartments = function (coordinator) {
   });
   return apartmentsWithResidents;
 };
-
 module.exports = { filterApartments };

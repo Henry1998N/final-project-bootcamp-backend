@@ -3,8 +3,10 @@ const {
   addInstructor,
   getCoordinatorApartmentsByInstructors,
   getInstructors,
+  getInstructorById,
 } = require("../routes-functions.js/coordinator-queries");
 const { filterApartments } = require("../routes-functions.js/helperFunctions");
+
 const addCoordinator = async function (req, res) {
   try {
     const { newCoordinator } = req.body;
@@ -60,6 +62,7 @@ const getInstructorsByCoordinatorId = async function (req, res) {
     [];
   }
 };
+
 module.exports = {
   addCoordinator,
   addNewInstructor,

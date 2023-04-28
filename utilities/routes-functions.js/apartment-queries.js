@@ -42,6 +42,9 @@ const addNewApartment = async function (apartment) {
   const newApartment = generateApartment(apartment);
   newApartment.save();
 };
+const getApartmentName = function (apartmentId) {
+  return Apartment.findById(apartmentId, { apartmentName: 1 });
+};
 module.exports = {
   getApartmentsByInstructorId,
   generateApartment,
@@ -49,4 +52,5 @@ module.exports = {
   getAllApartments,
   getApartmentByName,
   addNewApartment,
+  getApartmentName,
 };

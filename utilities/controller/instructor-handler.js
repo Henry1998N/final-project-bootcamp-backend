@@ -9,6 +9,7 @@ const {
   deleteInstructorById,
   getInstructorShifts,
   getInstructorById,
+  getMedicalAppointments,
 } = require("../../utilities/routes-functions.js/instructor-queries");
 const { createShift } = require("../routes-functions.js/shift-queries");
 
@@ -128,6 +129,19 @@ const getInstructorShiftsById = async function (req, res) {
     res.status(500).send({ message: "server error" });
   }
 };
+const getResidentsMedicalAppointments = async function (req, res) {
+  try {
+    const instructorId = req.params.instructorId;
+    const response = await getMedicalAppointments(instructorId);
+    if (!response) {
+      res.status(401).send({ message: "failed" });
+      return;
+    }
+    res.status(200).send(response);
+  } catch (err) {
+    res.status(500).send({ message: "server error" });
+  }
+};
 module.exports = {
   signIn,
   addNewInstructor,
@@ -136,4 +150,5 @@ module.exports = {
   getInstructorShiftsById,
   updateInstructor,
   deleteInstructor,
+  getResidentsMedicalAppointments,
 };

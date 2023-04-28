@@ -8,6 +8,7 @@ const {
   deleteInstructor,
   addShift,
   getInstructorShiftsById,
+  getResidentsMedicalAppointments,
 } = require("../../utilities/controller/instructor-handler");
 const {
   googleLogin,
@@ -24,5 +25,9 @@ router.put("/:instructorId", updateInstructor);
 router.delete("/:instructorId", deleteInstructor);
 router.post("/shifts/:instructorId", addShift);
 router.get("/shifts/:id", getInstructorShiftsById);
+router.get(
+  "/residents/medicalAppointments/:instructorId",
+  getResidentsMedicalAppointments
+);
 
 module.exports = router;

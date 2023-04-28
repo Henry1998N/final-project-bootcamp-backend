@@ -80,6 +80,26 @@ const getInstructorShifts = async function (instructorId) {
   const shifts = await Instructor.findById(instructorId).populate("shifts");
   return shifts;
 };
+const getMedicalAppointments = async function (instructorId) {
+  const medicalAppointments = await Instructor.findById(instructorId, {
+    image: 1,
+    apartments: 1,
+  }).populate({
+    path: "apartments",
+    select: "_id residents apartmentName",
+
+    populate: {
+      path: "residents",
+      select: "_id firstName lastName",
+
+      populate: {
+        path: "medicalAppointments",
+        model: "Appointment",
+      },
+    },
+  });
+  return medicalAppointments;
+};
 module.exports = {
   getInstructor,
   addInstructor,
@@ -88,4 +108,5 @@ module.exports = {
   deleteInstructorById,
   getInstructorById,
   getInstructorShifts,
+  getMedicalAppointments,
 };

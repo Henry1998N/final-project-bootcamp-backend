@@ -55,8 +55,14 @@ const updateInstructorApartmentsById = async function (
     { new: true }
   );
 };
+
+const addReportToInstructor = async function(instructorId, reportId) {
+  return await Instructor.findByIdAndUpdate(instructorId, {$push: {reports: reportId}}, {new: true})
+}
+
 module.exports = {
   getInstructor,
   addInstructor,
   updateInstructorApartmentsById,
+  addReportToInstructor,
 };

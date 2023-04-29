@@ -7,7 +7,7 @@ const {
   updateInstructorApartmentsById,
   addReportToInstructor,
 } = require("../../utilities/routes-functions.js/instructor-queries");
-const {createNewReport} = require('../routes-functions.js/report-queries')
+const {createNewReport, fetchReportsByInstructorId} = require('../routes-functions.js/report-queries')
 
 const signIn = async function (req, res) {
   const { email, password } = req.body;
@@ -58,11 +58,26 @@ const addNewReport = async function(req, res) {
       res.status(401).send({ errorCode: 401, message: "Error with creating a new Report" });
       return
     }
-    res.status(200).send({message: "Report was created successfully", report: instructorResponse})
+    res.status(200).send({message: "Report was created successfully"})
   }
   catch(err) {
     res.status(401).send({ message: err.message });
   }
 }
 
-module.exports = { signIn, addNewInstructor, updateInstructorApartments, addNewReport };
+const fetchAllReportsByInstructorId = async function(req, res) {
+  try {
+    const {instructorId} = req.body
+    const response = await fetchReportsByInstructorId(instructorId)
+    if (!response) {
+      res.status(401).send({ errorCode: 401, message: "There seems to be a problem fetching your reports" });
+      return
+    }
+    res.status(200).send({message: "Reports were successfully fetched", reports: response})
+  }
+  catch(err) {
+    res.status(401).send({ message: err.message });
+  }
+}
+
+module.exports = { signIn, addNewInstructor, updateInstructorApartments, addNewReport, fetchAllReportsByInstructorId };

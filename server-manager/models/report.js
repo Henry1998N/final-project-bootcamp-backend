@@ -6,7 +6,10 @@ const reportSchema = new Schema({
   personalPlans: Object,
   generalActivities: Object,
   date: String,
-  apartmentId: String
+  apartmentId: String,
+  instructorId: String,
+  apartmentName: String,
+  reportName: String
 });
 
 const Report = mongoose.model("Report", reportSchema);

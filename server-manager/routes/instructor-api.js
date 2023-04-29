@@ -5,6 +5,7 @@ const {
   addNewInstructor,
   updateInstructorApartments,
   addNewReport,
+  fetchAllReportsByInstructorId,
 } = require("../../utilities/controller/instructor-handler");
 const {
   googleLogin,
@@ -18,4 +19,5 @@ router.post("/auth/google-login", googleLogin);
 router.post("/instructors", addNewInstructor);
 router.post("/instructorApartment", updateInstructorApartments);
 router.post('/report', addNewReport)
+router.post('/reports', fetchAllReportsByInstructorId)
 module.exports = router;

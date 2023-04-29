@@ -5,11 +5,18 @@ const createNewReport = async(report) => {
         residentsSummary: report.residentsSummary,
         personalPlans: report.personalPlans,
         generalActivities: report.generalActivities,
+        instructorId: report.instructorId,
         date: report.date,
-        apartmentId: report.apartmentId
+        apartmentId: report.apartmentId,
+        apartmentName: report.apartmentName,
+        reportName: report.reportName
     })
     await newReport.save()
     return newReport._id
 }
 
-module.exports = {createNewReport};
+const fetchReportsByInstructorId = async(instructorId) => {
+    return await Report.find({instructorId: instructorId})
+}
+
+module.exports = {createNewReport, fetchReportsByInstructorId};

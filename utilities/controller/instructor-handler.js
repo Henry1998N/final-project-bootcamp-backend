@@ -25,6 +25,7 @@ const { filterBirthdays } = require("../routes-functions.js/helperFunctions");
 const {
   getResidentsByApartmentName,
 } = require("../routes-functions.js/apartment-queries");
+const { response } = require("express");
 
 const signIn = async function (req, res) {
   const { email, password } = req.body;
@@ -152,6 +153,14 @@ const getInstructorShiftsById = async function (req, res) {
   }
 };
 
+const getInstructorByInstructorID = async function (req,res){
+  const instructorId = req.params.instructorID
+  const response = await getInstructorById(instructorId)
+
+  res.status(200).send(response);
+} 
+
+
 const getResidentsByInstructorId = async function (req, res) {
   const instructorId = req.params.id;
   try {
@@ -261,4 +270,5 @@ module.exports = {
   addNewReport,
   fetchAllReportsByInstructorId,
   getResidentsBirthdaysByInstructorId,
+  getInstructorByInstructorID,
 };

@@ -14,6 +14,7 @@ const {
   addNewReport,
   fetchAllReportsByInstructorId,
   getResidentsBirthdaysByInstructorId,
+  getInstructorByInstructorID,
 } = require("../../utilities/controller/instructor-handler");
 const {
   googleLogin,
@@ -41,5 +42,6 @@ router.get(
   "/residents/birthdays/:instructorId",
   getResidentsBirthdaysByInstructorId
 );
+router.get("/instructor/:instructorID",getInstructorByInstructorID);
 
 module.exports = router;

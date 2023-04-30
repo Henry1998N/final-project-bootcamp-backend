@@ -109,10 +109,23 @@ const getMedicalAppointments = async function (instructorId) {
   });
   return medicalAppointments;
 };
-
-const addReportToInstructor = async function(instructorId, reportId) {
-  return await Instructor.findByIdAndUpdate(instructorId, {$push: {reports: reportId}}, {new: true})
-}
+const getResidentsBirthdays = async function (instructorId) {
+  return Instructor.findById(instructorId, { apartments: 1 }).populate({
+    path: "apartments",
+    select: "_id residents apartmentName",
+    populate: {
+      path: "residents",
+      select: "_id dateOfBirth firstName lastName",
+    },
+  });
+};
+const addReportToInstructor = async function (instructorId, reportId) {
+  return await Instructor.findByIdAndUpdate(
+    instructorId,
+    { $push: { reports: reportId } },
+    { new: true }
+  );
+};
 
 module.exports = {
   getInstructor,
@@ -125,4 +138,5 @@ module.exports = {
   getInstructorApartments,
   getMedicalAppointments,
   addReportToInstructor,
+  getResidentsBirthdays,
 };

@@ -113,20 +113,20 @@ const getResidentsBirthdays = async function (instructorId) {
   return Instructor.findById(instructorId, { apartments: 1 }).populate({
     path: "apartments",
     select: "_id residents apartmentName",
-
-<<<<<<< HEAD
-const addReportToInstructor = async function(instructorId, reportId) {
-  return await Instructor.findByIdAndUpdate(instructorId, {$push: {reports: reportId}}, {new: true})
-}
-
-=======
     populate: {
       path: "residents",
       select: "_id dateOfBirth firstName lastName",
     },
   });
 };
->>>>>>> fixScheduler
+const addReportToInstructor = async function (instructorId, reportId) {
+  return await Instructor.findByIdAndUpdate(
+    instructorId,
+    { $push: { reports: reportId } },
+    { new: true }
+  );
+};
+
 module.exports = {
   getInstructor,
   addInstructor,
@@ -137,9 +137,6 @@ module.exports = {
   getInstructorShifts,
   getInstructorApartments,
   getMedicalAppointments,
-<<<<<<< HEAD
   addReportToInstructor,
-=======
   getResidentsBirthdays,
->>>>>>> fixScheduler
 };

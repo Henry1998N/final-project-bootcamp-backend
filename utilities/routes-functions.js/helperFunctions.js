@@ -17,4 +17,19 @@ const filterApartments = function (coordinator) {
   });
   return apartmentsWithResidents;
 };
-module.exports = { filterApartments };
+const filterBirthdays = function (apartments) {
+  const filteredBirthdays = [];
+  apartments.forEach((a) => {
+    a.residents.forEach((r) => {
+      filteredBirthdays.push({
+        apartmentName: a.apartmentName,
+        residentName: r.firstName + " " + r.lastName,
+        startDate: r.dateOfBirth,
+        endDate: r.dateOfBirth,
+      });
+    });
+  });
+
+  return filteredBirthdays;
+};
+module.exports = { filterApartments, filterBirthdays };

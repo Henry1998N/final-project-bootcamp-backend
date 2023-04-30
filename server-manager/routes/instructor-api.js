@@ -13,6 +13,7 @@ const {
   getResidentsByInstructorId,
   addNewReport,
   fetchAllReportsByInstructorId,
+  getResidentsBirthdaysByInstructorId,
 } = require("../../utilities/controller/instructor-handler");
 const {
   googleLogin,
@@ -33,7 +34,12 @@ router.get(
   "/residents/medicalAppointments/:instructorId",
   getResidentsMedicalAppointments
 );
-router.get('/residents/:id', getResidentsByInstructorId)
-router.post('/report', addNewReport)
-router.post('/reports', fetchAllReportsByInstructorId)
+router.get("/residents/:id", getResidentsByInstructorId);
+router.post("/report", addNewReport);
+router.post("/reports", fetchAllReportsByInstructorId);
+router.get(
+  "/residents/birthdays/:instructorId",
+  getResidentsBirthdaysByInstructorId
+);
+
 module.exports = router;

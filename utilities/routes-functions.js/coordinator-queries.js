@@ -66,21 +66,24 @@ const getInstructors = async function (coordinatorId) {
   });
 };
 const getCoordinatorResidents = async function (coordinatorId) {
-  const coordinator = await Coordinator.findById(coordinatorId).populate({
-    path: "instructors",
-    select: "_id apartments",
-
+  const coordinator = await Coordinator.findById(coordinatorId)
+  .populate({
+    path: 'instructors',
     populate: {
-      path: "apartments",
-      select: "_id residents",
-
+      path: 'apartments',
       populate: {
-        path: "residents",
-        model: "Resident",
-      },
-    },
+        path: 'residents',
+        model: "Resident"
+      }
+    }
+  })
+  const residents = [];
+  coordinator.instructors.forEach((instructor) => {
+    instructor.apartments.forEach((apartment) => {
+      residents.push(...apartment.residents);
+    });
   });
-  return coordinator;
+  return residents;
 };
 module.exports = {
   saveCoordinator,

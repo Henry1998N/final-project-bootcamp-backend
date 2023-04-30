@@ -59,4 +59,6 @@ router.post(
   residentHandler.addNewResident
 );
 
+router.post("/contact", residentHandler.sendMessageToResidentContact)
+
 module.exports = router;

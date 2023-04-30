@@ -13,9 +13,15 @@ const {
   getInstructorApartments,
   getMedicalAppointments,
   addReportToInstructor,
+  getResidentsBirthdays,
 } = require("../../utilities/routes-functions.js/instructor-queries");
+const {
+  createNewReport,
+  fetchReportsByInstructorId,
+} = require("../routes-functions.js/report-queries");
 const { createShift } = require("../routes-functions.js/shift-queries");
-const {createNewReport, fetchReportsByInstructorId} = require('../routes-functions.js/report-queries')
+const { filterBirthdays } = require("../routes-functions.js/helperFunctions");
+
 const {
   getResidentsByApartmentName,
 } = require("../routes-functions.js/apartment-queries");
@@ -183,37 +189,64 @@ const getResidentsMedicalAppointments = async function (req, res) {
     res.status(500).send({ message: "server error" });
   }
 };
-
-const addNewReport = async function(req, res) {
-  try{
-    const { instructorId, report } = req.body
-    const reportResponse = await createNewReport(report)
-    const instructorResponse = await addReportToInstructor(instructorId, reportResponse)
-    if (!instructorResponse) {
-      res.status(401).send({ errorCode: 401, message: "Error with creating a new Report" });
-      return
-    }
-    res.status(200).send({message: "Report was created successfully"})
-  }
-  catch(err) {
-    res.status(401).send({ message: err.message });
-  }
-}
-
-const fetchAllReportsByInstructorId = async function(req, res) {
+const getResidentsBirthdaysByInstructorId = async function (req, res) {
   try {
-    const {instructorId} = req.body
-    const response = await fetchReportsByInstructorId(instructorId)
+    const instructorId = req.params.instructorId;
+
+    const response = await getResidentsBirthdays(instructorId);
     if (!response) {
-      res.status(401).send({ errorCode: 401, message: "There seems to be a problem fetching your reports" });
-      return
+      res.status(401).send({ message: "failed" });
+      return;
     }
-    res.status(200).send({message: "Reports were successfully fetched", reports: response})
+    res.status(200).send(filterBirthdays(response.apartments));
+  } catch (err) {
+    res.status(500).send({ message: "server error" });
   }
-  catch(err) {
+};
+
+const addNewReport = async function (req, res) {
+  try {
+    const { instructorId, report } = req.body;
+    const reportResponse = await createNewReport(report);
+    const instructorResponse = await addReportToInstructor(
+      instructorId,
+      reportResponse
+    );
+    if (!instructorResponse) {
+      res
+        .status(401)
+        .send({ errorCode: 401, message: "Error with creating a new Report" });
+      return;
+    }
+    res.status(200).send({ message: "Report was created successfully" });
+  } catch (err) {
     res.status(401).send({ message: err.message });
   }
-}
+};
+
+const fetchAllReportsByInstructorId = async function (req, res) {
+  try {
+    const { instructorId } = req.body;
+    const response = await fetchReportsByInstructorId(instructorId);
+    if (!response) {
+      res
+        .status(401)
+        .send({
+          errorCode: 401,
+          message: "There seems to be a problem fetching your reports",
+        });
+      return;
+    }
+    res
+      .status(200)
+      .send({
+        message: "Reports were successfully fetched",
+        reports: response,
+      });
+  } catch (err) {
+    res.status(401).send({ message: err.message });
+  }
+};
 
 module.exports = {
   signIn,
@@ -226,5 +259,6 @@ module.exports = {
   getResidentsByInstructorId,
   getResidentsMedicalAppointments,
   addNewReport,
-  fetchAllReportsByInstructorId
+  fetchAllReportsByInstructorId,
+  getResidentsBirthdaysByInstructorId,
 };

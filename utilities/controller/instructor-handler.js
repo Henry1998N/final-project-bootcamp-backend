@@ -12,8 +12,11 @@ const {
   getInstructorById,
   getInstructorApartments,
   getMedicalAppointments,
+  getResidentsBirthdays,
 } = require("../../utilities/routes-functions.js/instructor-queries");
 const { createShift } = require("../routes-functions.js/shift-queries");
+const { filterBirthdays } = require("../routes-functions.js/helperFunctions");
+
 const {
   getResidentsByApartmentName,
 } = require("../routes-functions.js/apartment-queries");
@@ -182,6 +185,20 @@ const getResidentsMedicalAppointments = async function (req, res) {
     res.status(500).send({ message: "server error" });
   }
 };
+const getResidentsBirthdaysByInstructorId = async function (req, res) {
+  try {
+    const instructorId = req.params.instructorId;
+
+    const response = await getResidentsBirthdays(instructorId);
+    if (!response) {
+      res.status(401).send({ message: "failed" });
+      return;
+    }
+    res.status(200).send(filterBirthdays(response.apartments));
+  } catch (err) {
+    res.status(500).send({ message: "server error" });
+  }
+};
 
 module.exports = {
   signIn,
@@ -193,4 +210,5 @@ module.exports = {
   deleteInstructor,
   getResidentsByInstructorId,
   getResidentsMedicalAppointments,
+  getResidentsBirthdaysByInstructorId,
 };

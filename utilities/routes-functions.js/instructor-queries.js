@@ -109,7 +109,17 @@ const getMedicalAppointments = async function (instructorId) {
   });
   return medicalAppointments;
 };
+const getResidentsBirthdays = async function (instructorId) {
+  return Instructor.findById(instructorId, { apartments: 1 }).populate({
+    path: "apartments",
+    select: "_id residents apartmentName",
 
+    populate: {
+      path: "residents",
+      select: "_id dateOfBirth firstName lastName",
+    },
+  });
+};
 module.exports = {
   getInstructor,
   addInstructor,
@@ -121,4 +131,5 @@ module.exports = {
   getInstructorApartments,
 
   getMedicalAppointments,
+  getResidentsBirthdays,
 };

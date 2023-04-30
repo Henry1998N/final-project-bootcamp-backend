@@ -74,8 +74,7 @@ const updateInstructor = async function (req, res) {
     const instructorId = req.params.instructorId;
     const response = await updateInstructorById(
       instructorId,
-      req.query.name,
-      req.query.phoneNumber
+      req.body.instructor
     );
     if (!response) {
       res.status(401).send({ message: "error with the updating" });

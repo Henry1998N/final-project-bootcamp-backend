@@ -58,13 +58,10 @@ const updateInstructorApartmentsById = async function (
   );
 };
 
-const updateInstructorById = async function (instructorId, name, phoneNumber) {
-  return await Instructor.findOneAndUpdate(
-    { instructorId: instructorId },
-    {
-      name: name,
-      phoneNumber: phoneNumber,
-    },
+const updateInstructorById = async function (instructorId, instructor) {
+  return await Instructor.findByIdAndUpdate(
+    instructorId,
+    instructor,
     { new: true }
   );
 };

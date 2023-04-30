@@ -110,6 +110,10 @@ const getMedicalAppointments = async function (instructorId) {
   return medicalAppointments;
 };
 
+const addReportToInstructor = async function(instructorId, reportId) {
+  return await Instructor.findByIdAndUpdate(instructorId, {$push: {reports: reportId}}, {new: true})
+}
+
 module.exports = {
   getInstructor,
   addInstructor,
@@ -119,6 +123,6 @@ module.exports = {
   getInstructorById,
   getInstructorShifts,
   getInstructorApartments,
-
   getMedicalAppointments,
+  addReportToInstructor,
 };

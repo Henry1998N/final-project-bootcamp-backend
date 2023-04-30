@@ -11,6 +11,8 @@ const {
   getInstructorShiftsById,
   getResidentsMedicalAppointments,
   getResidentsByInstructorId,
+  addNewReport,
+  fetchAllReportsByInstructorId,
 } = require("../../utilities/controller/instructor-handler");
 const {
   googleLogin,
@@ -32,4 +34,6 @@ router.get(
   getResidentsMedicalAppointments
 );
 router.get('/residents/:id', getResidentsByInstructorId)
+router.post('/report', addNewReport)
+router.post('/reports', fetchAllReportsByInstructorId)
 module.exports = router;

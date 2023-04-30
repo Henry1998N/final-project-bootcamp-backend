@@ -6,6 +6,7 @@ const {
   getCoordinatorApartments,
   getInstructorsByCoordinatorId,
   getCoordinatorResidentsById,
+  getCoordinatorByCoordinatorID,
   addShift,
 } = require("../../utilities/controller/coordinator-handler");
 router.post("/coordinators", addCoordinator);
@@ -13,6 +14,7 @@ router.post("/coordinators/instructors/:id", addNewInstructor);
 router.get("/coordinators/apartments/:id", getCoordinatorApartments);
 router.get("/coordinators/instructors/:id", getInstructorsByCoordinatorId);
 router.get("/residents/:id", getCoordinatorResidentsById);
+router.get("/coordinator/:id", getCoordinatorByCoordinatorID);
 
 // Create a new shift for an instructor
 

@@ -85,10 +85,17 @@ const getCoordinatorResidents = async function (coordinatorId) {
   });
   return residents;
 };
+
+const getCoordinatorById = async function (instructorId) {
+  return Coordinator.findById(instructorId);
+};
+
+
 module.exports = {
   saveCoordinator,
   addInstructor,
   getCoordinatorApartmentsByInstructors,
   getInstructors,
   getCoordinatorResidents,
+  getCoordinatorById
 };

@@ -3,7 +3,7 @@ const {
   addInstructor,
   getCoordinatorApartmentsByInstructors,
   getInstructors,
-  getInstructorById,
+  getCoordinatorById,
   getCoordinatorResidents,
 } = require("../routes-functions.js/coordinator-queries");
 const { filterApartments } = require("../routes-functions.js/helperFunctions");
@@ -77,10 +77,19 @@ const getCoordinatorResidentsById = async function (req, res) {
   }
 };
 
+const getCoordinatorByCoordinatorID = async function (req,res){
+  const instructorId = req.params.id
+  const response = await getCoordinatorById(instructorId)
+
+  res.status(200).send(response);
+} 
+
+
 module.exports = {
   addCoordinator,
   addNewInstructor,
   getCoordinatorApartments,
   getInstructorsByCoordinatorId,
   getCoordinatorResidentsById,
+  getCoordinatorByCoordinatorID,
 };

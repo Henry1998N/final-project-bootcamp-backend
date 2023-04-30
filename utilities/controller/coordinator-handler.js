@@ -4,6 +4,7 @@ const {
   getCoordinatorApartmentsByInstructors,
   getInstructors,
   getInstructorById,
+  getCoordinatorResidents,
 } = require("../routes-functions.js/coordinator-queries");
 const { filterApartments } = require("../routes-functions.js/helperFunctions");
 
@@ -46,7 +47,7 @@ const getCoordinatorApartments = async function (req, res) {
     }
     res.status(200).send(filterApartments(response));
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send({ message: "server error" });
   }
 };
 const getInstructorsByCoordinatorId = async function (req, res) {
@@ -59,7 +60,20 @@ const getInstructorsByCoordinatorId = async function (req, res) {
     }
     res.status(200).send(response);
   } catch (err) {
-    [];
+    res.status(500).send({ message: "server error" });
+  }
+};
+const getCoordinatorResidentsById = async function (req, res) {
+  try {
+    const coordinatorId = req.params.id;
+    const response = await getCoordinatorResidents(coordinatorId);
+    if (!response) {
+      res.status(400).send({ message: "mongo error" });
+      return;
+    }
+    res.status(200).send(response);
+  } catch (err) {
+    res.status(500).send({ message: "server error" });
   }
 };
 
@@ -68,4 +82,5 @@ module.exports = {
   addNewInstructor,
   getCoordinatorApartments,
   getInstructorsByCoordinatorId,
+  getCoordinatorResidentsById,
 };

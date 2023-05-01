@@ -5,6 +5,7 @@ const {
   getInstructors,
   getCoordinatorById,
   getCoordinatorResidents,
+  fetchReportsByCoordinatorId,
 } = require("../routes-functions.js/coordinator-queries");
 const { filterApartments } = require("../routes-functions.js/helperFunctions");
 
@@ -77,13 +78,27 @@ const getCoordinatorResidentsById = async function (req, res) {
   }
 };
 
-const getCoordinatorByCoordinatorID = async function (req,res){
-  const instructorId = req.params.id
-  const response = await getCoordinatorById(instructorId)
+const getCoordinatorByCoordinatorID = async function (req, res) {
+  const instructorId = req.params.id;
+  const response = await getCoordinatorById(instructorId);
 
   res.status(200).send(response);
-} 
+};
 
+const getReportsByCoordinatorId = async function (req, res) {
+  try {
+    const { coordinatorId } = req.body;
+    const response = await fetchReportsByCoordinatorId(coordinatorId)
+    if (response) {
+      res.status(200).send(response);
+      return
+    }
+    res.status(401).send({message: "Something went wrong while fetching your reports"});
+  }
+  catch (error) {
+    res.status(401).send({message: "Something went wrong while fetching your reports"})
+  }
+};
 
 module.exports = {
   addCoordinator,
@@ -92,4 +107,5 @@ module.exports = {
   getInstructorsByCoordinatorId,
   getCoordinatorResidentsById,
   getCoordinatorByCoordinatorID,
+  getReportsByCoordinatorId,
 };

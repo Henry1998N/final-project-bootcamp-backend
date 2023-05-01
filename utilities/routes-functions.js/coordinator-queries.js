@@ -1,4 +1,5 @@
 const Coordinator = require("../../server-manager/models/coordinator");
+const Report = require("../../server-manager/models/report");
 const mongoose = require("mongoose");
 const { generateUser } = require("../routes-functions.js/user-queries");
 const bcrypt = require("bcrypt");
@@ -66,17 +67,16 @@ const getInstructors = async function (coordinatorId) {
   });
 };
 const getCoordinatorResidents = async function (coordinatorId) {
-  const coordinator = await Coordinator.findById(coordinatorId)
-  .populate({
-    path: 'instructors',
+  const coordinator = await Coordinator.findById(coordinatorId).populate({
+    path: "instructors",
     populate: {
-      path: 'apartments',
+      path: "apartments",
       populate: {
-        path: 'residents',
-        model: "Resident"
-      }
-    }
-  })
+        path: "residents",
+        model: "Resident",
+      },
+    },
+  });
   const residents = [];
   coordinator.instructors.forEach((instructor) => {
     instructor.apartments.forEach((apartment) => {
@@ -90,6 +90,19 @@ const getCoordinatorById = async function (instructorId) {
   return Coordinator.findById(instructorId);
 };
 
+const fetchReportsByCoordinatorId = async function (coordinatorId) {
+  const coordinator = await Coordinator.findOne({
+    _id: coordinatorId,
+  }).populate("instructors");
+  const reports = [];
+  for (const instructor of coordinator.instructors) {
+    const instructorReports = await Report.find({
+      _id: { $in: instructor.reports },
+    });
+    reports.push(...instructorReports);
+  }
+  return reports
+};
 
 module.exports = {
   saveCoordinator,
@@ -97,5 +110,6 @@ module.exports = {
   getCoordinatorApartmentsByInstructors,
   getInstructors,
   getCoordinatorResidents,
-  getCoordinatorById
+  getCoordinatorById,
+  fetchReportsByCoordinatorId,
 };

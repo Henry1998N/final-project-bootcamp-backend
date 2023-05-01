@@ -153,13 +153,6 @@ const getInstructorShiftsById = async function (req, res) {
   }
 };
 
-const getInstructorByInstructorID = async function (req,res){
-  const instructorId = req.params.instructorID
-  const response = await getInstructorById(instructorId)
-
-  res.status(200).send(response);
-} 
-
 
 const getResidentsByInstructorId = async function (req, res) {
   const instructorId = req.params.id;
@@ -277,5 +270,4 @@ module.exports = {
   fetchAllReportsByInstructorId,
   getResidentsBirthdaysByInstructorId,
   fetchInstructorById,
-  getInstructorByInstructorID,
 };

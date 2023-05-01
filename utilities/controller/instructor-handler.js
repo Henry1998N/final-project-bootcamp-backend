@@ -249,6 +249,12 @@ const fetchAllReportsByInstructorId = async function (req, res) {
   }
 };
 
+const fetchInstructorById = async function (req, res) {
+  const instructorId = req.params.instructorId
+  const instructor = await getInstructorById(instructorId)
+  res.send(instructor)
+}
+
 module.exports = {
   signIn,
   addNewInstructor,
@@ -262,4 +268,5 @@ module.exports = {
   addNewReport,
   fetchAllReportsByInstructorId,
   getResidentsBirthdaysByInstructorId,
+  fetchInstructorById
 };

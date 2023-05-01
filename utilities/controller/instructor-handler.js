@@ -25,6 +25,7 @@ const { filterBirthdays } = require("../routes-functions.js/helperFunctions");
 const {
   getResidentsByApartmentName,
 } = require("../routes-functions.js/apartment-queries");
+const { response } = require("express");
 
 const signIn = async function (req, res) {
   const { email, password } = req.body;
@@ -74,8 +75,7 @@ const updateInstructor = async function (req, res) {
     const instructorId = req.params.instructorId;
     const response = await updateInstructorById(
       instructorId,
-      req.query.name,
-      req.query.phoneNumber
+      req.body.instructor
     );
     if (!response) {
       res.status(401).send({ message: "error with the updating" });
@@ -152,6 +152,14 @@ const getInstructorShiftsById = async function (req, res) {
     res.status(500).send({ message: "server error" });
   }
 };
+
+const getInstructorByInstructorID = async function (req,res){
+  const instructorId = req.params.instructorID
+  const response = await getInstructorById(instructorId)
+
+  res.status(200).send(response);
+} 
+
 
 const getResidentsByInstructorId = async function (req, res) {
   const instructorId = req.params.id;
@@ -268,5 +276,6 @@ module.exports = {
   addNewReport,
   fetchAllReportsByInstructorId,
   getResidentsBirthdaysByInstructorId,
-  fetchInstructorById
+  fetchInstructorById,
+  getInstructorByInstructorID,
 };
